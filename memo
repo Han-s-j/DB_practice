@@ -14,3 +14,11 @@ ROLLBACK *이미커밋이된내역은되돌릴수없다.
 UPDATE문
 DELETE문 / 보통은 UPDATE로 처리함
 ALTER
+
+20-02-2025
+논리 연산자를 통한 테이블 조회
+표현식 CASE 문 (WHEN으로 열고 END로 닫는다)
+Not, LIKE, IS NOT
+함수
+ABS, CEIL, Round, FLOOR, MOD, SQRT, LOWER, UPPER, SUBSTR
+pk fk
