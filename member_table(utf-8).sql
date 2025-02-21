@@ -8,8 +8,8 @@ DROP TABLE prod;
 DROP TABLE buyer;
 DROP TABLE lprod;
 
--- 媛앹껜?씠由? 30?옄 ?씠?궡, 臾댁“嫄? ?븣?뙆踰녹떆?옉, ?븣?뙆踰?, ?닽?옄, _,$ 
--- 媛앹껜?씠由꾩? 臾댁“嫄? ??臾몄옄濡? ???옣?맖. 
+-- 객체이름 30자 이내, 무조건 알파벳시작, 알파벳, 숫자, _,$ 
+-- 객체이름은 무조건 대문자로 저장됨. 
 CREATE TABLE lprod
 (
   lprod_id  NUMBER(7)   NOT NULL,
@@ -19,15 +19,15 @@ CREATE TABLE lprod
 );
 
 
-INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(1,'P101','而댄벂?꽣?젣?뭹');
-INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(2,'P102','?쟾?옄?젣?뭹');
-INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(3,'P201','?뿬?꽦罹먯＜?뼹');
-INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(4,'P202','?궓?꽦罹먯＜?뼹');
-INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(5,'P301','?뵾?쁺?옟?솕');
-INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(6,'P302','?솕?옣?뭹');
-INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(7,'P401','?쓬諛?/CD');
-INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(8,'P402','?룄?꽌');
-INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(9,'P403','臾멸뎄瑜?');
+INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(1,'P101','컴퓨터제품');
+INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(2,'P102','전자제품');
+INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(3,'P201','여성캐주얼');
+INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(4,'P202','남성캐주얼');
+INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(5,'P301','피혁잡화');
+INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(6,'P302','화장품');
+INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(7,'P401','음반/CD');
+INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(8,'P402','도서');
+INSERT INTO lprod(lprod_id,lprod_gu,lprod_nm) VALUES(9,'P403','문구류');
 
 /*
 SELECT * FROM lprod
@@ -41,7 +41,7 @@ SELECT lprod_gu, lprod_nm FROM lprod
   order by  lprod_nm desc
 
 update lprod
-  set lprod_nm='?쟾?옄?젣?뭹'
+  set lprod_nm='전자제품'
   WHERE lprod_gu='P102' 
 
 delete FROM lprod
@@ -51,17 +51,17 @@ delete FROM lprod
 -- DROP TABLE buyer
  
 CREATE TABLE buyer
-(  buyer_id           CHAR(6)       NOT NULL,   --嫄곕옒泥섏퐫?뱶 
-   buyer_name         VARCHAR2(50)  NOT NULL,   --嫄곕옒泥섎챸
-   buyer_lgu          CHAR(4)       NOT NULL,   --痍④툒?긽?뭹??遺꾨쪟
-   buyer_bank         VARCHAR2(40),            --???뻾
-   buyer_bankno       VARCHAR2(40),             --怨꾩쥖踰덊샇
-   buyer_bankname     VARCHAR2(15),             --?삁湲덉＜
-   buyer_zip          CHAR(7),                  --?슦?렪踰덊샇
-   buyer_add1         VARCHAR2(100),             --二쇱냼1
-   buyer_add2         VARCHAR2(80),             --二쇱냼2
-   buyer_comtel       VARCHAR2(14)  NOT NULL,   --?쟾?솕踰덊샇 
-   buyer_fax          VARCHAR2(20)  NOT NULL    --fax踰덊샇 
+(  buyer_id           CHAR(6)       NOT NULL,   --거래처코드 
+   buyer_name         VARCHAR2(50)  NOT NULL,   --거래처명
+   buyer_lgu          CHAR(4)       NOT NULL,   --취급상품대분류
+   buyer_bank         VARCHAR2(40),            --은행
+   buyer_bankno       VARCHAR2(40),             --계좌번호
+   buyer_bankname     VARCHAR2(15),             --예금주
+   buyer_zip          CHAR(7),                  --우편번호
+   buyer_add1         VARCHAR2(100),             --주소1
+   buyer_add2         VARCHAR2(80),             --주소2
+   buyer_comtel       VARCHAR2(14)  NOT NULL,   --전화번호 
+   buyer_fax          VARCHAR2(20)  NOT NULL    --fax번호 
 );
 
  ALTER TABLE buyer add ( buyer_mail VARCHAR2(40) NOT NULL,
@@ -85,54 +85,54 @@ INSERT INTO buyer (buyer_id, buyer_name, buyer_lgu, buyer_bank,
 */
 
 INSERT INTO buyer (buyer_id,buyer_name,buyer_lgu,buyer_bank,buyer_bankno,buyer_bankname,buyer_zip,buyer_add1,buyer_add2,buyer_comtel,buyer_fax,buyer_mail,buyer_charger)
-  VALUES ('P10101','?궪?꽦而댄벂?꽣','P101','二쇳깮???뻾','123-456-7890','?씠嫄댁긽','135-972','?꽌?슱 媛뺣궓援? ?룄怨?2?룞?쁽??鍮꾩졏21','1125?샇','02-522-7890','02-522-7891','samcom@samsung.co.kr','?넚?룞援?');
+  VALUES ('P10101','삼성컴퓨터','P101','주택은행','123-456-7890','이건상','135-972','서울 강남구 도곡2동현대비젼21','1125호','02-522-7890','02-522-7891','samcom@samsung.co.kr','송동구');
 INSERT INTO buyer (buyer_id,buyer_name,buyer_lgu,buyer_bank,buyer_bankno,buyer_bankname,buyer_zip,buyer_add1,buyer_add2,buyer_comtel,buyer_fax,buyer_mail,buyer_charger)  
-  VALUES ('P10102','?궪蹂댁뺨?벂?꽣','P101','?젣?씪???뻾','732-702-195670','源??쁽?슦','142-726','?꽌?슱 媛뺣턿援? 誘몄븘6?룞 ?뻾?쟾鍮뚮뵫','2712?샇','02-632-5690','02-632-5699','sambo@sambo.co.kr','源??꽌援?');
+  VALUES ('P10102','삼보컴퓨터','P101','제일은행','732-702-195670','김현우','142-726','서울 강북구 미아6동 행전빌딩','2712호','02-632-5690','02-632-5699','sambo@sambo.co.kr','김서구');
 INSERT INTO buyer (buyer_id,buyer_name,buyer_lgu,buyer_bank,buyer_bankno,buyer_bankname,buyer_zip,buyer_add1,buyer_add2,buyer_comtel,buyer_fax,buyer_mail,buyer_charger)
-  VALUES ('P10103','?쁽二쇱뺨?벂?꽣','P101','援?誘쇱??뻾','112-650-397811','?떖?쁽二?','404-260','?씤泥? ?꽌援? 留덉쟾?룞','157-899踰덉?','032-233-7832','032-233-7833','hyunju@hyunju.com','媛뺣궓援?') ;
+  VALUES ('P10103','현주컴퓨터','P101','국민은행','112-650-397811','심현주','404-260','인천 서구 마전동','157-899번지','032-233-7832','032-233-7833','hyunju@hyunju.com','강남구') ;
 INSERT INTO buyer (buyer_id,buyer_name,buyer_lgu,buyer_bank,buyer_bankno,buyer_bankname,buyer_zip,buyer_add1,buyer_add2,buyer_comtel,buyer_fax,buyer_mail,buyer_charger)
-  VALUES ('P10201','???슦?쟾?옄','P102','?냽?삊','222-333-567890','媛뺣??슦','702-864','??援? 遺곴뎄 ?깭?쟾?룞','232踰덉?','053-780-2356','053-780-2357','daewoo@daewoo.co.kr','?꽦???슦') ;
+  VALUES ('P10201','대우전자','P102','농협','222-333-567890','강대우','702-864','대구 북구 태전동','232번지','053-780-2356','053-780-2357','daewoo@daewoo.co.kr','성대우') ;
 INSERT INTO buyer (buyer_id,buyer_name,buyer_lgu,buyer_bank,buyer_bankno,buyer_bankname,buyer_zip,buyer_add1,buyer_add2,buyer_comtel,buyer_fax,buyer_mail,buyer_charger)
-  VALUES ('P10202','?궪?꽦?쟾?옄','P102','?쇅?솚???뻾','989-323-567898','諛뺤궪?꽦','614-728','遺??궛 遺??궛吏꾧뎄 遺??쟾1?룞 ?룞?븘鍮뚮뵫','1708?샇','051-567-5312','051-567-5313','samsung@samsung.com','源??씤?슦');
+  VALUES ('P10202','삼성전자','P102','외환은행','989-323-567898','박삼성','614-728','부산 부산진구 부전1동 동아빌딩','1708호','051-567-5312','051-567-5313','samsung@samsung.com','김인우');
 INSERT INTO buyer (buyer_id,buyer_name,buyer_lgu,buyer_bank,buyer_bankno,buyer_bankname,buyer_zip,buyer_add1,buyer_add2,buyer_comtel,buyer_fax,buyer_mail,buyer_charger) 
-  VALUES ('P20101','???쁽','P201','援?誘쇱??뻾','688-323-567898','?떊???쁽','306-785','???쟾 ???뜒援? ?삤?젙?룞 ?슫?븫鍮뚮뵫','508?샇','042-332-5123','042-332-5125','daehyun@daehyun.com','吏꾨??쁺');
+  VALUES ('P20101','대현','P201','국민은행','688-323-567898','신대현','306-785','대전 대덕구 오정동 운암빌딩','508호','042-332-5123','042-332-5125','daehyun@daehyun.com','진대영');
 INSERT INTO buyer (buyer_id,buyer_name,buyer_lgu,buyer_bank,buyer_bankno,buyer_bankname,buyer_zip,buyer_add1,buyer_add2,buyer_comtel,buyer_fax,buyer_mail,buyer_charger) 
-  VALUES ('P20102','留덈Ⅴ二?','P201','二쇳깮???뻾','123-777-7890','?씠留덈（','135-972','?꽌?슱 媛뺣궓援? ?룄怨?2?룞 ?쁽??鍮꾩졏21','1211?샇','02-533-7890','02-533-5699','mar@marjo.co.kr','議고쁽?긽')  ;
+  VALUES ('P20102','마르죠','P201','주택은행','123-777-7890','이마루','135-972','서울 강남구 도곡2동 현대비젼21','1211호','02-533-7890','02-533-5699','mar@marjo.co.kr','조현상')  ;
 INSERT INTO buyer (buyer_id,buyer_name,buyer_lgu,buyer_bank,buyer_bankno,buyer_bankname,buyer_zip,buyer_add1,buyer_add2,buyer_comtel,buyer_fax,buyer_mail,buyer_charger)
-  VALUES ('P20201','LG?뙣?뀡','P202','?젣?씪???뻾','732-702-556677','源??븷吏?','142-726','?꽌?슱 媛뺣턿援? 誘몄븘6?룞 ?뻾?쟾鍮뚮뵫','5011?샇','02-332-5690','02-332-5699','lgfashion.co.kr','?궓吏??닔');
+  VALUES ('P20201','LG패션','P202','제일은행','732-702-556677','김애지','142-726','서울 강북구 미아6동 행전빌딩','5011호','02-332-5690','02-332-5699','lgfashion.co.kr','남지수');
 INSERT INTO buyer (buyer_id,buyer_name,buyer_lgu,buyer_bank,buyer_bankno,buyer_bankname,buyer_zip,buyer_add1,buyer_add2,buyer_comtel,buyer_fax,buyer_mail,buyer_charger) 
-  VALUES ('P20202','罹좊툕由ъ?','P202','援?誘쇱??뻾','112-888-397811','?븞遺덉씠二?','404-260','?씤泥? ?꽌援? 留덉쟾?룞','535-899踰덉?','032-255-7832','032-255-7833','cambrige@cambrige.com','?떊?씪?닔');
+  VALUES ('P20202','캠브리지','P202','국민은행','112-888-397811','안불이주','404-260','인천 서구 마전동','535-899번지','032-255-7832','032-255-7833','cambrige@cambrige.com','신일수');
 INSERT INTO buyer (buyer_id,buyer_name,buyer_lgu,buyer_bank,buyer_bankno,buyer_bankname,buyer_zip,buyer_add1,buyer_add2,buyer_comtel,buyer_fax,buyer_mail,buyer_charger) 
-  VALUES ('P30101','媛??뙆移?','P301','?냽?삊','211-333-511890','源??꽑?븘','702-864','??援? 遺곴뎄 ?깭?쟾?룞','555-66?샇','053-535-2356','053-535-2357','gapachi@gapachi.co.kr','?씠?닔?굹')  ;
+  VALUES ('P30101','가파치','P301','농협','211-333-511890','김선아','702-864','대구 북구 태전동','555-66호','053-535-2356','053-535-2357','gapachi@gapachi.co.kr','이수나')  ;
 INSERT INTO buyer (buyer_id,buyer_name,buyer_lgu,buyer_bank,buyer_bankno,buyer_bankname,buyer_zip,buyer_add1,buyer_add2,buyer_comtel,buyer_fax,buyer_mail,buyer_charger)
-   VALUES ('P30201','?븳援??솕?옣?뭹','P302','?쇅?솚???뻾','333-355-568898','諛뺥븳援?','614-728','遺??궛 遺??궛吏꾧뎄 遺??쟾1?룞 ?룞?븘鍮뚮뵫','309?샇','051-212-5312','051-212-5313','hangook@hangook.com','源??궗?슦');
+   VALUES ('P30201','한국화장품','P302','외환은행','333-355-568898','박한국','614-728','부산 부산진구 부전1동 동아빌딩','309호','051-212-5312','051-212-5313','hangook@hangook.com','김사우');
 INSERT INTO buyer (buyer_id,buyer_name,buyer_lgu,buyer_bank,buyer_bankno,buyer_bankname,buyer_zip,buyer_add1,buyer_add2,buyer_comtel,buyer_fax,buyer_mail,buyer_charger)
-  VALUES ('P30202','?뵾由ъ뼱?뒪','P302','援?誘쇱??뻾','677-888-569998','?떊?긽?슦','306-785','???쟾???뜒援? ?삤?젙?룞 ?슫?븫鍮뚮뵫','612?샇','042-222-5123','042-222-5125','pieoris@pieoris.com','?씠吏꾩쁺');
+  VALUES ('P30202','피리어스','P302','국민은행','677-888-569998','신상우','306-785','대전대덕구 오정동 운암빌딩','612호','042-222-5123','042-222-5125','pieoris@pieoris.com','이진영');
 INSERT INTO buyer (buyer_id,buyer_name,buyer_lgu,buyer_bank,buyer_bankno,buyer_bankname,buyer_zip,buyer_add1,buyer_add2,buyer_comtel,buyer_fax,buyer_mail,buyer_charger)
-  VALUES ('P30203','李몄〈','P302','二쇳깮???뻾','555-777-567778','?삤李몄〈','306-785','???쟾???뜒援? ?삤?젙?룞 ?슫?븫鍮뚮뵫','1007?샇','042-622-5123','042-622-5125','chamjon@chamjon.com','?꽦?븷??');
+  VALUES ('P30203','참존','P302','주택은행','555-777-567778','오참존','306-785','대전대덕구 오정동 운암빌딩','1007호','042-622-5123','042-622-5125','chamjon@chamjon.com','성애란');
 
 
 CREATE TABLE  prod
-(  prod_id             VARCHAR2(10)     NOT NULL,     -- ?긽?뭹肄붾뱶
-   prod_name           VARCHAR2(40)     NOT NULL,     -- ?긽?뭹紐?
-   prod_lgu            CHAR(4 )         NOT NULL,     -- ?긽?뭹遺꾨쪟
-   prod_buyer          CHAR(6)          NOT NULL,     -- 怨듦툒?뾽泥?(肄붾뱶)
-   prod_cost           NUMBER(10)       NOT NULL,     -- 留ㅼ엯媛?
-   prod_price          NUMBER(10)       NOT NULL,     -- ?냼鍮꾩옄媛?
-   prod_sale           NUMBER(10)       NOT NULL,     -- ?뙋留ㅺ?
-   prod_outline        VARCHAR2(100)     NOT NULL,     -- ?긽?뭹媛쒕왂?꽕紐?
-   prod_detail         CLOB,                          -- ?긽?뭹?긽?꽭?꽕紐?
-   prod_img            VARCHAR2(40)     NOT NULL,     -- ?씠誘몄?(?냼)
-   prod_totalstock     NUMBER(10)       NOT NULL,     -- ?옱怨좎닔?웾
-   prod_insdate        DATE,                          -- ?떊洹쒖씪?옄(?벑濡앹씪)
-   prod_properstock    NUMBER(10)       NOT NULL,     -- ?븞?쟾?옱怨좎닔?웾
-   prod_size           VARCHAR2(20),                  -- ?겕湲?
-   prod_color          VARCHAR2(20),                  -- ?깋?긽
-   prod_delivery       VARCHAR2(255),                 -- 諛곕떖?듅湲곗궗?빆
-   prod_unit           VARCHAR2(6),                   -- ?떒?쐞(?닔?웾)
-   prod_qtyin          NUMBER(10),                    -- 珥앹엯怨좎닔?웾
-   prod_qtysale        NUMBER(10),                    -- 珥앺뙋留ㅼ닔?웾
-   prod_mileage        NUMBER(10),                    -- 媛쒕떦 留덉씪由ъ? ?젏?닔
+(  prod_id             VARCHAR2(10)     NOT NULL,     -- 상품코드
+   prod_name           VARCHAR2(40)     NOT NULL,     -- 상품명
+   prod_lgu            CHAR(4 )         NOT NULL,     -- 상품분류
+   prod_buyer          CHAR(6)          NOT NULL,     -- 공급업체(코드)
+   prod_cost           NUMBER(10)       NOT NULL,     -- 매입가
+   prod_price          NUMBER(10)       NOT NULL,     -- 소비자가
+   prod_sale           NUMBER(10)       NOT NULL,     -- 판매가
+   prod_outline        VARCHAR2(100)     NOT NULL,     -- 상품개략설명
+   prod_detail         CLOB,                          -- 상품상세설명
+   prod_img            VARCHAR2(40)     NOT NULL,     -- 이미지(소)
+   prod_totalstock     NUMBER(10)       NOT NULL,     -- 재고수량
+   prod_insdate        DATE,                          -- 신규일자(등록일)
+   prod_properstock    NUMBER(10)       NOT NULL,     -- 안전재고수량
+   prod_size           VARCHAR2(20),                  -- 크기
+   prod_color          VARCHAR2(20),                  -- 색상
+   prod_delivery       VARCHAR2(255),                 -- 배달특기사항
+   prod_unit           VARCHAR2(6),                   -- 단위(수량)
+   prod_qtyin          NUMBER(10),                    -- 총입고수량
+   prod_qtysale        NUMBER(10),                    -- 총판매수량
+   prod_mileage        NUMBER(10),                    -- 개당 마일리지 점수
    CONSTRAINT pk_prod_id PRIMARY KEY (prod_id),
    CONSTRAINT fr_prod_lgu FOREIGN KEY (prod_lgu) REFERENCES lprod(lprod_gu),
    CONSTRAINT fr_prod_buyer FOREIGN KEY (prod_buyer) REFERENCES buyer(buyer_id)  
@@ -140,160 +140,160 @@ CREATE TABLE  prod
 
 
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P101000001','紐⑤땲?꽣 ?궪?꽦?쟾?옄15?씤移섏뭡?씪','P101','P10101',210000,290000,230000,'?룊硫대え?땲?꽣?쓽 湲곗쟻','?슦由ш린?닠?쓽 媛쒓?','P101000001.gif',0,'2005-01-10',33,'15?씤移?','','?뙆?넀 二쇱쓽','EA',0,0) ;
+       VALUES ('P101000001','모니터 삼성전자15인치칼라','P101','P10101',210000,290000,230000,'평면모니터의 기적','우리기술의 개가','P101000001.gif',0,'2005-01-10',33,'15인치','','파손 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P101000002','紐⑤땲?꽣 ?궪?꽦?쟾?옄17?씤移섏뭡?씪','P101','P10101',310000,390000,330000,'?룊硫대え?땲?꽣?쓽 湲곗쟻','?슦由ш린?닠?쓽 媛쒓?','P101000002.gif',0,'2005-01-10',23,'17?씤移?','','?뙆?넀 二쇱쓽','EA',0,0) ;
+       VALUES ('P101000002','모니터 삼성전자17인치칼라','P101','P10101',310000,390000,330000,'평면모니터의 기적','우리기술의 개가','P101000002.gif',0,'2005-01-10',23,'17인치','','파손 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P101000003','紐⑤땲?꽣 ?궪?꽦?쟾?옄19?씤移섏뭡?씪','P101','P10101',410000,490000,430000,'?룊硫대え?땲?꽣?쓽 湲곗쟻','?슦由ш린?닠?쓽 媛쒓?','P101000003.gif',0,'2005-01-10',15,'19?씤移?','','?뙆?넀 二쇱쓽','EA',0,0) ;
+       VALUES ('P101000003','모니터 삼성전자19인치칼라','P101','P10101',410000,490000,430000,'평면모니터의 기적','우리기술의 개가','P101000003.gif',0,'2005-01-10',15,'19인치','','파손 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P101000004','?궪蹂댁뺨?벂?꽣 P-III 600Mhz','P101','P10102',1150000,1780000,1330000,'?돩?슫 ?씤?꽣?꽬?쓣.....','?깉濡쒖슫 李⑥썝?쓽 而댄벂?꽣瑜?.....','P101000004.gif',0,'2005-02-08',22,'','','?뙆?넀 二쇱쓽','EA',0,0) ;
+       VALUES ('P101000004','삼보컴퓨터 P-III 600Mhz','P101','P10102',1150000,1780000,1330000,'쉬운 인터넷을.....','새로운 차원의 컴퓨터를.....','P101000004.gif',0,'2005-02-08',22,'','','파손 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P101000005','?궪蹂댁뺨?벂?꽣 P-III 700Mhz','P101','P10102',2150000,2780000,2330000,'?돩?슫 ?씤?꽣?꽬?쓣.....','?깉濡쒖슫 李⑥썝?쓽 而댄벂?꽣瑜?.....','P101000005.gif',0,'2005-02-08',31,'','','?뙆?넀 二쇱쓽','EA',0,0) ;
+       VALUES ('P101000005','삼보컴퓨터 P-III 700Mhz','P101','P10102',2150000,2780000,2330000,'쉬운 인터넷을.....','새로운 차원의 컴퓨터를.....','P101000005.gif',0,'2005-02-08',31,'','','파손 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P101000006','?궪蹂댁뺨?벂?꽣 P-III 800Mhz','P101','P10102',3150000,3780000,3330000,'?돩?슫 ?씤?꽣?꽬?쓣.....','?깉濡쒖슫 李⑥썝?쓽 而댄벂?꽣瑜?.....','P101000006.gif',0,'2005-02-08',17,'','','?뙆?넀 二쇱쓽','EA',0,0) ;
+       VALUES ('P101000006','삼보컴퓨터 P-III 800Mhz','P101','P10102',3150000,3780000,3330000,'쉬운 인터넷을.....','새로운 차원의 컴퓨터를.....','P101000006.gif',0,'2005-02-08',17,'','','파손 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P102000001','???슦 移쇰씪 TV 25?씤移?','P102','P10201',690000,820000,720000,'吏묒븞?뿉 ?쁺?솕愿??쓣.....','?룊硫? 釉뚮씪?슫愿??쓽 ?깉?옣.....','P102000001.gif',0,'2005-02-22',53,'25?씤移?','?쓳?깋','?뙆?넀 二쇱쓽','EA',0,0) ;
+       VALUES ('P102000001','대우 칼라 TV 25인치','P102','P10201',690000,820000,720000,'집안에 영화관을.....','평면 브라운관의 새장.....','P102000001.gif',0,'2005-02-22',53,'25인치','흑색','파손 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P102000002','???슦 移쇰씪 TV 29?씤移?','P102','P10201',890000,1020000,920000,'吏묒븞?뿉 ?쁺?솕愿??쓣.....','?룊硫? 釉뚮씪?슫愿??쓽 ?깉?옣.....','P102000002.gif',0,'2005-02-22',21,'29?씤移?','?쓳?깋','?뙆?넀 二쇱쓽','EA',0,0) ;
+       VALUES ('P102000002','대우 칼라 TV 29인치','P102','P10201',890000,1020000,920000,'집안에 영화관을.....','평면 브라운관의 새장.....','P102000002.gif',0,'2005-02-22',21,'29인치','흑색','파손 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P102000003','?궪?꽦 移쇰씪 TV 21?씤移?','P102','P10202',590000,720000,620000,'吏묒븞?뿉 ?쁺?솕愿??쓣.....','?룊硫? 釉뚮씪?슫愿??쓽 ?깉?옣.....','P102000003.gif',0,'2005-01-22',11,'21?씤移?','???깋','?뙆?넀 二쇱쓽','EA',0,0) ;
+       VALUES ('P102000003','삼성 칼라 TV 21인치','P102','P10202',590000,720000,620000,'집안에 영화관을.....','평면 브라운관의 새장.....','P102000003.gif',0,'2005-01-22',11,'21인치','은색','파손 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P102000004','?궪?꽦 移쇰씪 TV 29?씤移?','P102','P10202',990000,1120000,1020000,'吏묒븞?뿉 ?쁺?솕愿??쓣.....','?룊硫? 釉뚮씪?슫愿??쓽 ?깉?옣.....','P102000004.gif',0,'2005-01-22',19,'29?씤移?','???깋','?뙆?넀 二쇱쓽','EA',0,0) ;
+       VALUES ('P102000004','삼성 칼라 TV 29인치','P102','P10202',990000,1120000,1020000,'집안에 영화관을.....','평면 브라운관의 새장.....','P102000004.gif',0,'2005-01-22',19,'29인치','은색','파손 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P102000005','?궪?꽦 移쇰씪 TV 53?씤移?','P102','P10202',1990000,2120000,2020000,'吏묒븞?뿉 ?쁺?솕愿??쓣.....','?룊硫? 釉뚮씪?슫愿??쓽 ?깉?옣.....','P102000005.gif',0,'2005-01-22',8,'53?씤移?','???깋','?뙆?넀 二쇱쓽','EA',0,0) ;
+       VALUES ('P102000005','삼성 칼라 TV 53인치','P102','P10202',1990000,2120000,2020000,'집안에 영화관을.....','평면 브라운관의 새장.....','P102000005.gif',0,'2005-01-22',8,'53인치','은색','파손 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P102000006','?궪?꽦 罹좎퐫?뜑','P102','P10202',660000,880000,770000,'媛?議깃낵 ?쁺?솕珥ъ쁺?쓣.....','?젅???? ?븿猿?.....','P102000006.gif',0,'2005-02-23',17,'','','?뙆?넀 二쇱쓽','EA',0,0) ;
+       VALUES ('P102000006','삼성 캠코더','P102','P10202',660000,880000,770000,'가족과 영화촬영을.....','레저와 함께.....','P102000006.gif',0,'2005-02-23',17,'','','파손 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P102000007','???슦 VTR 6?뿤?뱶','P102','P10201',550000,760000,610000,'?꽑紐낇븳 ?솕吏?','媛먮룞?쓽 紐낇솕瑜?.....','P102000007.gif',0,'2005-01-23',36,'','','?뙆?넀 二쇱쓽','EA',0,0) ;
+       VALUES ('P102000007','대우 VTR 6헤드','P102','P10201',550000,760000,610000,'선명한 화질','감동의 명화를.....','P102000007.gif',0,'2005-01-23',36,'','','파손 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000001','?뿬?꽦 遊? ?뀛痢? 1','P201','P20101',21000,42000,27000,'?뙆由뉙븳 遊꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000001.gif',0,'2005-01-09',9,'s','泥??깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000001','여성 봄 셔츠 1','P201','P20101',21000,42000,27000,'파릇한 봄을 위한','아름다운.....','P201000001.gif',0,'2005-01-09',9,'s','청색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000002','?뿬?꽦 遊? ?뀛痢? 2','P201','P20101',22000,43000,28000,'?뙆由뉙븳 遊꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000002.gif',0,'2005-01-09',9,'M','?씛?깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000002','여성 봄 셔츠 2','P201','P20101',22000,43000,28000,'파릇한 봄을 위한','아름다운.....','P201000002.gif',0,'2005-01-09',9,'M','흰색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000003','?뿬?꽦 遊? ?뀛痢? 3','P201','P20101',23000,44000,29000,'?뙆由뉙븳 遊꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000003.gif',0,'2005-01-09',9,'L','媛먯깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000003','여성 봄 셔츠 3','P201','P20101',23000,44000,29000,'파릇한 봄을 위한','아름다운.....','P201000003.gif',0,'2005-01-09',9,'L','감색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000004','?뿬?꽦 ?뿬由? ?뀛痢? 1','P201','P20101',12000,21000,25000,'?떆?썝?븳 ?뿬由꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000004.gif',0,'2005-01-11',9,'s','泥??깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000004','여성 여름 셔츠 1','P201','P20101',12000,21000,25000,'시원한 여름을 위한','아름다운.....','P201000004.gif',0,'2005-01-11',9,'s','청색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000005','?뿬?꽦 ?뿬由? ?뀛痢? 2','P201','P20101',13000,22000,26000,'?떆?썝?븳 ?뿬由꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000005.gif',0,'2005-01-11',9,'M','?씛?깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000005','여성 여름 셔츠 2','P201','P20101',13000,22000,26000,'시원한 여름을 위한','아름다운.....','P201000005.gif',0,'2005-01-11',9,'M','흰색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000006','?뿬?꽦 ?뿬由? ?뀛痢? 3','P201','P20101',14000,23000,27000,'?떆?썝?븳 ?뿬由꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000006.gif',0,'2005-01-11',9,'L','媛먯깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000006','여성 여름 셔츠 3','P201','P20101',14000,23000,27000,'시원한 여름을 위한','아름다운.....','P201000006.gif',0,'2005-01-11',9,'L','감색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000007','?뿬?꽦 寃⑥슱 ?씪?슫?뱶 ?뀛痢? 1','P201','P20101',31000,45000,33000,'?뵲?쑜?븳 寃⑥슱?쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000007.gif',0,'2005-01-25',9,'s','泥??깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000007','여성 겨울 라운드 셔츠 1','P201','P20101',31000,45000,33000,'따뜻한 겨울을 위한','아름다운.....','P201000007.gif',0,'2005-01-25',9,'s','청색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000008','?뿬?꽦 寃⑥슱 ?씪?슫?뱶 ?뀛痢? 2','P201','P20101',32000,46000,34000,'?뵲?쑜?븳 寃⑥슱?쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000008.gif',0,'2005-01-25',9,'M','?씛?깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000008','여성 겨울 라운드 셔츠 2','P201','P20101',32000,46000,34000,'따뜻한 겨울을 위한','아름다운.....','P201000008.gif',0,'2005-01-25',9,'M','흰색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000009','?뿬?꽦 寃⑥슱 ?씪?슫?뱶 ?뀛痢? 3','P201','P20101',33000,47000,35000,'?뵲?쑜?븳 寃⑥슱?쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000009.gif',0,'2005-01-25',9,'L','媛먯깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000009','여성 겨울 라운드 셔츠 3','P201','P20101',33000,47000,35000,'따뜻한 겨울을 위한','아름다운.....','P201000009.gif',0,'2005-01-25',9,'L','감색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000010','?뿬?꽦 泥?諛붿? 1','P201','P20102',55000,66000,57000,'?렪由ы븳 ?솢?룞?뙆瑜? ?쐞?븳','?렪由ы븳.....','P201000010.gif',0,'2005-01-31',38,'30','','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000010','여성 청바지 1','P201','P20102',55000,66000,57000,'편리한 활동파를 위한','편리한.....','P201000010.gif',0,'2005-01-31',38,'30','','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000011','?뿬?꽦 泥?諛붿? 2','P201','P20102',56000,67000,58000,'?렪由ы븳 ?솢?룞?뙆瑜? ?쐞?븳','?렪由ы븳.....','P201000011.gif',0,'2005-01-31',35,'32','','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000011','여성 청바지 2','P201','P20102',56000,67000,58000,'편리한 활동파를 위한','편리한.....','P201000011.gif',0,'2005-01-31',35,'32','','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000012','?뿬?꽦 泥?諛붿? 3','P201','P20102',57000,68000,59000,'?렪由ы븳 ?솢?룞?뙆瑜? ?쐞?븳','?렪由ы븳.....','P201000012.gif',0,'2005-01-31',33,'34','','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000012','여성 청바지 3','P201','P20102',57000,68000,59000,'편리한 활동파를 위한','편리한.....','P201000012.gif',0,'2005-01-31',33,'34','','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000013','?뿬?꽦 遊? ?옄耳? 1','P201','P20101',110000,210000,170000,'?렪由ы븳 ?솢?룞?뙆?쓽 遊꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000013.gif',0,'2005-02-18',16,'66','泥??깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000013','여성 봄 자켓 1','P201','P20101',110000,210000,170000,'편리한 활동파의 봄을 위한','아름다운.....','P201000013.gif',0,'2005-02-18',16,'66','청색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000014','?뿬?꽦 遊? ?옄耳? 2','P201','P20101',120000,220000,180000,'?렪由ы븳 ?솢?룞?뙆?쓽 遊꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000014.gif',0,'2005-02-18',18,'77','?씛?깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000014','여성 봄 자켓 2','P201','P20101',120000,220000,180000,'편리한 활동파의 봄을 위한','아름다운.....','P201000014.gif',0,'2005-02-18',18,'77','흰색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000015','?뿬?꽦 遊? ?옄耳? 3','P201','P20101',130000,230000,190000,'?렪由ы븳 ?솢?룞?뙆?쓽 遊꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000015.gif',0,'2005-02-18',17,'88','媛먯깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000015','여성 봄 자켓 3','P201','P20101',130000,230000,190000,'편리한 활동파의 봄을 위한','아름다운.....','P201000015.gif',0,'2005-02-18',17,'88','감색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000016','?뿬?꽦 ?뿬由? ?옄耳? 1','P201','P20102',100000,160000,130000,'?렪由ы븳 ?솢?룞?뙆?쓽 ?뿬由꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000016.gif',0,'2005-02-21',12,'66','泥??깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000016','여성 여름 자켓 1','P201','P20102',100000,160000,130000,'편리한 활동파의 여름을 위한','아름다운.....','P201000016.gif',0,'2005-02-21',12,'66','청색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000017','?뿬?꽦 ?뿬由? ?옄耳? 2','P201','P20102',110000,170000,140000,'?렪由ы븳 ?솢?룞?뙆?쓽 ?뿬由꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000017.gif',0,'2005-02-21',21,'77','?씛?깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000017','여성 여름 자켓 2','P201','P20102',110000,170000,140000,'편리한 활동파의 여름을 위한','아름다운.....','P201000017.gif',0,'2005-02-21',21,'77','흰색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000018','?뿬?꽦 ?뿬由? ?옄耳? 3','P201','P20102',120000,180000,150000,'?렪由ы븳 ?솢?룞?뙆?쓽 ?뿬由꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000018.gif',0,'2005-02-21',11,'77','媛먯깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000018','여성 여름 자켓 3','P201','P20102',120000,180000,150000,'편리한 활동파의 여름을 위한','아름다운.....','P201000018.gif',0,'2005-02-21',11,'77','감색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000019','?뿬?꽦 寃⑥슱 ?옄耳? 1','P201','P20102',210000,270000,240000,'?렪由ы븳 ?솢?룞?뙆?쓽 ?뵲?쑜?븳 寃⑥슱?쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000019.gif',0,'2005-02-28',22,'66','泥??깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000019','여성 겨울 자켓 1','P201','P20102',210000,270000,240000,'편리한 활동파의 따뜻한 겨울을 위한','아름다운.....','P201000019.gif',0,'2005-02-28',22,'66','청색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000020','?뿬?꽦 寃⑥슱 ?옄耳? 2','P201','P20102',220000,280000,250000,'?렪由ы븳 ?솢?룞?뙆?쓽 ?뵲?쑜?븳 寃⑥슱?쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000020.gif',0,'2005-02-28',29,'77','?씛?깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000020','여성 겨울 자켓 2','P201','P20102',220000,280000,250000,'편리한 활동파의 따뜻한 겨울을 위한','아름다운.....','P201000020.gif',0,'2005-02-28',29,'77','흰색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P201000021','?뿬?꽦 寃⑥슱 ?옄耳? 3','P201','P20102',230000,290000,260000,'?렪由ы븳 ?솢?룞?뙆?쓽 ?뵲?쑜?븳 寃⑥슱?쓣 ?쐞?븳','?븘由꾨떎?슫.....','P201000021.gif',0,'2005-02-28',19,'88','媛먯깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P201000021','여성 겨울 자켓 3','P201','P20102',230000,290000,260000,'편리한 활동파의 따뜻한 겨울을 위한','아름다운.....','P201000021.gif',0,'2005-02-28',19,'88','감색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000001','?궓?꽦 遊? ?뀛痢? 1','P202','P20201',10000,19000,15000,'?뙆由뉙븳 遊꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000001.gif',0,'2005-01-05',9,'M','泥??깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000001','남성 봄 셔츠 1','P202','P20201',10000,19000,15000,'파릇한 봄을 위한','아름다운.....','P202000001.gif',0,'2005-01-05',9,'M','청색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000002','?궓?꽦 遊? ?뀛痢? 2','P202','P20201',13000,22000,18000,'?뙆由뉙븳 遊꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000002.gif',0,'2005-01-05',9,'L','?씛?깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000002','남성 봄 셔츠 2','P202','P20201',13000,22000,18000,'파릇한 봄을 위한','아름다운.....','P202000002.gif',0,'2005-01-05',9,'L','흰색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000003','?궓?꽦 遊? ?뀛痢? 3','P202','P20201',15000,24000,20000,'?뙆由뉙븳 遊꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000003.gif',0,'2005-01-05',9,'XL','媛먯깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000003','남성 봄 셔츠 3','P202','P20201',15000,24000,20000,'파릇한 봄을 위한','아름다운.....','P202000003.gif',0,'2005-01-05',9,'XL','감색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000004','?궓?꽦 ?뿬由? ?뀛痢? 1','P202','P20201',18000,28000,23000,'?떆?썝?븳 ?뿬由꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000004.gif',0,'2005-02-05',9,'M','泥??깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000004','남성 여름 셔츠 1','P202','P20201',18000,28000,23000,'시원한 여름을 위한','아름다운.....','P202000004.gif',0,'2005-02-05',9,'M','청색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000005','?궓?꽦 ?뿬由? ?뀛痢? 2','P202','P20201',23000,33000,28000,'?떆?썝?븳 ?뿬由꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000005.gif',0,'2005-02-05',9,'L','?씛?깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000005','남성 여름 셔츠 2','P202','P20201',23000,33000,28000,'시원한 여름을 위한','아름다운.....','P202000005.gif',0,'2005-02-05',9,'L','흰색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000006','?궓?꽦 ?뿬由? ?뀛痢? 3','P202','P20201',28000,38000,33000,'?떆?썝?븳 ?뿬由꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000006.gif',0,'2005-02-05',9,'XL','媛먯깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000006','남성 여름 셔츠 3','P202','P20201',28000,38000,33000,'시원한 여름을 위한','아름다운.....','P202000006.gif',0,'2005-02-05',9,'XL','감색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000007','?궓?꽦 寃⑥슱 ?씪?슫?뱶 ?뀛痢? 1','P202','P20201',25000,42000,31000,'?뵲?쑜?븳 寃⑥슱?쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000007.gif',0,'2005-01-13',9,'M','泥??깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000007','남성 겨울 라운드 셔츠 1','P202','P20201',25000,42000,31000,'따뜻한 겨울을 위한','아름다운.....','P202000007.gif',0,'2005-01-13',9,'M','청색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000008','?궓?꽦 寃⑥슱 ?씪?슫?뱶 ?뀛痢? 2','P202','P20201',27000,43000,33000,'?뵲?쑜?븳 寃⑥슱?쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000008.gif',0,'2005-01-13',9,'L','?씛?깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000008','남성 겨울 라운드 셔츠 2','P202','P20201',27000,43000,33000,'따뜻한 겨울을 위한','아름다운.....','P202000008.gif',0,'2005-01-13',9,'L','흰색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000009','?궓?꽦 寃⑥슱 ?씪?슫?뱶 ?뀛痢? 3','P202','P20201',28500,44000,35000,'?뵲?쑜?븳 寃⑥슱?쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000009.gif',0,'2005-01-13',9,'XL','媛먯깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000009','남성 겨울 라운드 셔츠 3','P202','P20201',28500,44000,35000,'따뜻한 겨울을 위한','아름다운.....','P202000009.gif',0,'2005-01-13',9,'XL','감색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000010','?궓?꽦 泥?諛붿? 1','P202','P20202',55000,66000,58000,'?렪由ы븳 ?솢?룞?뙆瑜? ?쐞?븳','?렪由ы븳.....','P202000010.gif',0,'2005-01-16',38,'30','','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000010','남성 청바지 1','P202','P20202',55000,66000,58000,'편리한 활동파를 위한','편리한.....','P202000010.gif',0,'2005-01-16',38,'30','','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000011','?궓?꽦 泥?諛붿? 2','P202','P20202',55000,66000,58000,'?렪由ы븳 ?솢?룞?뙆瑜? ?쐞?븳','?렪由ы븳.....','P202000011.gif',0,'2005-01-16',35,'32','','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000011','남성 청바지 2','P202','P20202',55000,66000,58000,'편리한 활동파를 위한','편리한.....','P202000011.gif',0,'2005-01-16',35,'32','','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000012','?궓?꽦 泥?諛붿? 3','P202','P20202',55000,66000,58000,'?렪由ы븳 ?솢?룞?뙆瑜? ?쐞?븳','?렪由ы븳.....','P202000012.gif',0,'2005-01-16',33,'34','','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000012','남성 청바지 3','P202','P20202',55000,66000,58000,'편리한 활동파를 위한','편리한.....','P202000012.gif',0,'2005-01-16',33,'34','','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000013','?궓?꽦 遊? ?옄耳? 1','P202','P20201',110000,230000,150000,'?렪由ы븳 ?솢?룞?뙆?쓽 遊꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000013.gif',0,'2005-02-17',16,'M','泥??깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000013','남성 봄 자켓 1','P202','P20201',110000,230000,150000,'편리한 활동파의 봄을 위한','아름다운.....','P202000013.gif',0,'2005-02-17',16,'M','청색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000014','?궓?꽦 遊? ?옄耳? 2','P202','P20201',120000,230000,160000,'?렪由ы븳 ?솢?룞?뙆?쓽 遊꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000014.gif',0,'2005-02-17',18,'L','?씛?깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000014','남성 봄 자켓 2','P202','P20201',120000,230000,160000,'편리한 활동파의 봄을 위한','아름다운.....','P202000014.gif',0,'2005-02-17',18,'L','흰색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000015','?궓?꽦 遊? ?옄耳? 3','P202','P20201',130000,230000,170000,'?렪由ы븳 ?솢?룞?뙆?쓽 遊꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000015.gif',0,'2005-02-17',17,'XL','媛먯깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000015','남성 봄 자켓 3','P202','P20201',130000,230000,170000,'편리한 활동파의 봄을 위한','아름다운.....','P202000015.gif',0,'2005-02-17',17,'XL','감색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000016','?궓?꽦 ?뿬由? ?옄耳? 1','P202','P20202',99000,160000,130000,'?렪由ы븳 ?솢?룞?뙆?쓽 ?뿬由꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000016.gif',0,'2005-02-06',12,'M','泥??깋','?꽭?긽 二쇱쓽','EA',0,0); 
+       VALUES ('P202000016','남성 여름 자켓 1','P202','P20202',99000,160000,130000,'편리한 활동파의 여름을 위한','아름다운.....','P202000016.gif',0,'2005-02-06',12,'M','청색','세탁 주의','EA',0,0); 
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000017','?궓?꽦 ?뿬由? ?옄耳? 2','P202','P20202',109000,170000,150000,'?렪由ы븳 ?솢?룞?뙆?쓽 ?뿬由꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000017.gif',0,'2005-02-06',21,'L','?씛?깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000017','남성 여름 자켓 2','P202','P20202',109000,170000,150000,'편리한 활동파의 여름을 위한','아름다운.....','P202000017.gif',0,'2005-02-06',21,'L','흰색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000018','?궓?꽦 ?뿬由? ?옄耳? 3','P202','P20202',159000,190000,170000,'?렪由ы븳 ?솢?룞?뙆?쓽 ?뿬由꾩쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000018.gif',0,'2005-02-06',11,'XL','媛먯깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000018','남성 여름 자켓 3','P202','P20202',159000,190000,170000,'편리한 활동파의 여름을 위한','아름다운.....','P202000018.gif',0,'2005-02-06',11,'XL','감색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000019','?궓?꽦 寃⑥슱 ?옄耳? 1','P202','P20202',210000,370000,280000,'?렪由ы븳 ?솢?룞?뙆?쓽 ?뵲?쑜?븳 寃⑥슱?쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000019.gif',0,'2005-02-20',22,'M','泥??깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000019','남성 겨울 자켓 1','P202','P20202',210000,370000,280000,'편리한 활동파의 따뜻한 겨울을 위한','아름다운.....','P202000019.gif',0,'2005-02-20',22,'M','청색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000020','?궓?꽦 寃⑥슱 ?옄耳? 2','P202','P20202',220000,370000,290000,'?렪由ы븳 ?솢?룞?뙆?쓽 ?뵲?쑜?븳 寃⑥슱?쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000020.gif',0,'2005-02-20',29,'L','?씛?깋','?꽭?긽 二쇱쓽','EA',0,0); 
+       VALUES ('P202000020','남성 겨울 자켓 2','P202','P20202',220000,370000,290000,'편리한 활동파의 따뜻한 겨울을 위한','아름다운.....','P202000020.gif',0,'2005-02-20',29,'L','흰색','세탁 주의','EA',0,0); 
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P202000021','?궓?꽦 寃⑥슱 ?옄耳? 3','P202','P20202',230000,370000,300000,'?렪由ы븳 ?솢?룞?뙆?쓽 ?뵲?쑜?븳 寃⑥슱?쓣 ?쐞?븳','?븘由꾨떎?슫.....','P202000021.gif',0,'2005-02-20',19,'XL','媛먯깋','?꽭?긽 二쇱쓽','EA',0,0) ;
+       VALUES ('P202000021','남성 겨울 자켓 3','P202','P20202',230000,370000,300000,'편리한 활동파의 따뜻한 겨울을 위한','아름다운.....','P202000021.gif',0,'2005-02-20',19,'XL','감색','세탁 주의','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P301000001','?븙?뼱 媛?二? ?쁺??','P301','P30101',21000,41000,33000,'硫뗭쭊 ?쁺??瑜? ?꽑臾쇰줈.....','吏꾧??븳 媛?二쎌쑝濡? ?젣?옉?맂.....','P301000001.gif',0,'2005-01-15',32,'','','','EA',0,0) ;
+       VALUES ('P301000001','악어 가죽 혁대','P301','P30101',21000,41000,33000,'멋진 혁대를 선물로.....','진귀한 가죽으로 제작된.....','P301000001.gif',0,'2005-01-15',32,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P301000002','臾쇱냼 媛?二? ?옣吏?媛?','P301','P30101',17000,37000,29000,'硫뗭쭊 吏?媛묒쓣 ?꽑臾쇰줈.....','吏꾧??븳 媛?二쎌쑝濡? ?젣?옉?맂.....','P301000002.gif',0,'2005-01-15',52,'','','','EA',0,0) ;
+       VALUES ('P301000002','물소 가죽 장지갑','P301','P30101',17000,37000,29000,'멋진 지갑을 선물로.....','진귀한 가죽으로 제작된.....','P301000002.gif',0,'2005-01-15',52,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P301000003','?뿬?꽦?슜 ?넀吏?媛?','P301','P30101',22000,33000,26000,'硫뗭쭊 吏?媛묒쓣 ?꽑臾쇰줈.....','吏꾧??븳 媛?二쎌쑝濡? ?젣?옉?맂.....','P301000003.gif',0,'2005-02-15',22,'','','','EA',0,0) ;
+       VALUES ('P301000003','여성용 손지갑','P301','P30101',22000,33000,26000,'멋진 지갑을 선물로.....','진귀한 가죽으로 제작된.....','P301000003.gif',0,'2005-02-15',22,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P301000004','?뿬?꽦?슜 罹먯?ъ뼹 踰⑦듃','P301','P30101',27000,37000,29000,'硫뗭쭊 踰⑦듃瑜? ?꽑臾쇰줈.....','吏꾧??븳 媛?二쎌쑝濡? ?젣?옉?맂.....','P301000004.gif',0,'2005-02-15',21,'','','','EA',0,0) ;
+       VALUES ('P301000004','여성용 캐쥬얼 벨트','P301','P30101',27000,37000,29000,'멋진 벨트를 선물로.....','진귀한 가죽으로 제작된.....','P301000004.gif',0,'2005-02-15',21,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000001','?뼢?닔 NO 5','P302','P30201',89000,110000,93000,'?뼢湲곕?? ?룞諛섑븳.....','?떎?젙?븿?쓣 ?뼢湲곗? ?븿猿?.....','P302000001.gif',0,'2005-01-24',11,'','','','EA',0,0) ;
+       VALUES ('P302000001','향수 NO 5','P302','P30201',89000,110000,93000,'향기를 동반한.....','다정함을 향기와 함께.....','P302000001.gif',0,'2005-01-24',11,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000002','?깶?꽟 NO 7','P302','P30201',99000,120000,103000,'?뼢湲곕?? ?룞諛섑븳.....','?떎?젙?븿?쓣 ?뼢湲곗? ?븿猿?.....','P302000002.gif',0,'2005-01-24',17,'','','','EA',0,0); 
+       VALUES ('P302000002','샤넬 NO 7','P302','P30201',99000,120000,103000,'향기를 동반한.....','다정함을 향기와 함께.....','P302000002.gif',0,'2005-01-24',17,'','','','EA',0,0); 
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000003','?궓?꽦?슜 ?뒪?궓','P302','P30201',19000,32000,21000,'?꽭?븞?썑 諛붾Ⅴ?뒗.....','?????븳 ?뼢湲곗? ?븿猿?.....','P302000003.gif',0,'2005-01-24',21,'','','','EA',0,0) ;
+       VALUES ('P302000003','남성용 스킨','P302','P30201',19000,32000,21000,'세안후 바르는.....','은은한 향기와 함께.....','P302000003.gif',0,'2005-01-24',21,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000004','?궓?꽦?슜 濡쒖?','P302','P30201',21000,33000,23000,'?꽭?븞?썑 諛붾Ⅴ?뒗.....','?????븳 ?뼢湲곗? ?븿猿?.....','P302000004.gif',0,'2005-02-12',19,'','','','EA',0,0) ;
+       VALUES ('P302000004','남성용 로숀','P302','P30201',21000,33000,23000,'세안후 바르는.....','은은한 향기와 함께.....','P302000004.gif',0,'2005-02-12',19,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000005','?뿬?꽦?슜 ?뒪?궓','P302','P30201',18000,31000,20000,'?꽭?븞?썑 諛붾Ⅴ?뒗.....','?????븳 ?뼢湲곗? ?븿猿?.....','P302000005.gif',0,'2005-02-12',21,'','','','EA',0,0) ;
+       VALUES ('P302000005','여성용 스킨','P302','P30201',18000,31000,20000,'세안후 바르는.....','은은한 향기와 함께.....','P302000005.gif',0,'2005-02-12',21,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000006','?뿬?꽦?슜 濡쒖?','P302','P30201',20000,32000,22000,'?꽭?븞?썑 諛붾Ⅴ?뒗.....','?????븳 ?뼢湲곗? ?븿猿?.....','P302000006.gif',0,'2005-02-12',19,'','','','EA',0,0) ;
+       VALUES ('P302000006','여성용 로숀','P302','P30201',20000,32000,22000,'세안후 바르는.....','은은한 향기와 함께.....','P302000006.gif',0,'2005-02-12',19,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000011','?궓?꽦 ?뼢?닔','P302','P30202',59000,70000,63000,'醫뗭? ?뼢湲곕?? ?룞諛섑븳.....','?떎?젙?븿?쓣 ?뼢湲곗? ?븿猿?.....','P302000011.gif',0,'2005-01-13',21,'','','','EA',0,0) ;
+       VALUES ('P302000011','남성 향수','P302','P30202',59000,70000,63000,'좋은 향기를 동반한.....','다정함을 향기와 함께.....','P302000011.gif',0,'2005-01-13',21,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000012','?뿬?꽦 ?뼢?닔','P302','P30202',89000,110000,93000,'醫뗭??뼢湲곕?? ?룞諛섑븳.....','?떎?젙?븿?쓣 ?뼢湲곗? ?븿猿?.....','P302000012.gif',0,'2005-01-13',27,'','','','EA',0,0) ;
+       VALUES ('P302000012','여성 향수','P302','P30202',89000,110000,93000,'좋은향기를 동반한.....','다정함을 향기와 함께.....','P302000012.gif',0,'2005-01-13',27,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000013','由쎌뒪?떛','P302','P30202',17000,27000,23000,'?꽭?븞?썑 諛붾Ⅴ?뒗 醫뗭?.....','?????븳 ?뼢湲곗? ?븿猿?.....','P302000013.gif',0,'2005-01-13',11,'','','','EA',0,0) ;
+       VALUES ('P302000013','립스틱','P302','P30202',17000,27000,23000,'세안후 바르는 좋은.....','은은한 향기와 함께.....','P302000013.gif',0,'2005-01-13',11,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000014','硫대룄?겕由?','P302','P30202',25000,32000,26000,'?꽭?븞?썑 諛붾Ⅴ?뒗 醫뗭?.....','?????븳 ?뼢湲곗? ?븿猿?.....','P302000014.gif',0,'2005-01-14',29,'','','','EA',0,0) ;
+       VALUES ('P302000014','면도크림','P302','P30202',25000,32000,26000,'세안후 바르는 좋은.....','은은한 향기와 함께.....','P302000014.gif',0,'2005-01-14',29,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000015','?솕?슫?뜲?씠?뀡','P302','P30202',22000,32000,23000,'?꽭?븞?썑 諛붾Ⅴ?뒗 醫뗭?.....','?????븳 ?뼢湲곗? ?븿猿?.....','P302000015.gif',0,'2005-01-14',15,'','','','EA',0,0) ;
+       VALUES ('P302000015','화운데이션','P302','P30202',22000,32000,23000,'세안후 바르는 좋은.....','은은한 향기와 함께.....','P302000015.gif',0,'2005-01-14',15,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000016','癒몃뱶?뙥','P302','P30202',120000,220000,172000,'?꽭?븞?썑 諛붾Ⅴ?뒗 醫뗭?.....','?????븳 ?뼢湲곗? ?븿猿?.....','P302000016.gif',0,'2005-01-14',32,'','','','EA',0,0) ;
+       VALUES ('P302000016','머드팩','P302','P30202',120000,220000,172000,'세안후 바르는 좋은.....','은은한 향기와 함께.....','P302000016.gif',0,'2005-01-14',32,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000021','李몄〈 湲곗큹?솕?옣?뭹','P302','P30203',23500,37500,26000,'?뵾遺?瑜? ?궛?쑜?븯寃?.....','?떎?젙?븿?쓣 ?뼢湲곗? ?븿猿?.....','P302000021.gif',0,'2005-01-28',25,'','','','EA',0,0) ;
+       VALUES ('P302000021','참존 기초화장품','P302','P30203',23500,37500,26000,'피부를 산뜻하게.....','다정함을 향기와 함께.....','P302000021.gif',0,'2005-01-28',25,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000022','李몄〈 ?뿬?꽦 ?뼢?닔','P302','P30203',78500,98500,83000,'醫뗭??뼢湲곗? ?뵾遺?瑜? ?궛?쑜?븯寃?.....','?떎?젙?븿?쓣 ?뼢湲곗? ?븿猿?.....','P302000022.gif',0,'2005-01-28',53,'','','','EA',0,0) ;
+       VALUES ('P302000022','참존 여성 향수','P302','P30203',78500,98500,83000,'좋은향기와 피부를 산뜻하게.....','다정함을 향기와 함께.....','P302000022.gif',0,'2005-01-28',53,'','','','EA',0,0) ;
 INSERT INTO prod  (prod_id,prod_name,prod_lgu,prod_buyer,prod_cost,prod_price,prod_sale,prod_outline,prod_detail,prod_img,prod_totalstock,prod_insdate,prod_properstock,prod_size,prod_color,prod_delivery,prod_unit,prod_qtyin,prod_qtysale)
-       VALUES ('P302000023','李몄〈 由쎌뒪?떛','P302','P30203',21500,26500,22500,'醫뗭? ?뵾遺?瑜? ?궛?쑜?븯寃?.....','?????븳 ?뼢湲곗? ?븿猿?.....','P302000023.gif',0,'2005-01-28',17,'','','','EA',0,0) ;
+       VALUES ('P302000023','참존 립스틱','P302','P30203',21500,26500,22500,'좋은 피부를 산뜻하게.....','은은한 향기와 함께.....','P302000023.gif',0,'2005-01-28',17,'','','','EA',0,0) ;
 
 
 CREATE TABLE  buyprod
-(  buy_date  DATE           NOT NULL,             -- ?엯怨좎씪?옄
-   buy_prod  VARCHAR2(10)   NOT NULL,             -- ?긽?뭹肄붾뱶
-   buy_qty   NUMBER(10)     NOT NULL,             -- 留ㅼ엯?닔?웾
-   buy_cost  NUMBER(10)     NOT NULL,             -- 留ㅼ엯?떒媛?
+(  buy_date  DATE           NOT NULL,             -- 입고일자
+   buy_prod  VARCHAR2(10)   NOT NULL,             -- 상품코드
+   buy_qty   NUMBER(10)     NOT NULL,             -- 매입수량
+   buy_cost  NUMBER(10)     NOT NULL,             -- 매입단가
    CONSTRAINT pk_buyprod PRIMARY KEY (buy_date,buy_prod), 
    CONSTRAINT fr_buy_prod FOREIGN KEY (buy_prod) REFERENCES prod(prod_id)
 );
@@ -449,132 +449,132 @@ INSERT INTO buyprod(buy_date,buy_prod,buy_qty,buy_cost) VALUES('2005-06-10','P20
 
 
 CREATE TABLE  member
-(  mem_id                VARCHAR2(15)   NOT NULL,   -- ?쉶?썝ID  
-   mem_pass              VARCHAR2(15)   NOT NULL,   -- 鍮꾨?踰덊샇
-   mem_name              VARCHAR2(20)   NOT NULL,   -- ?꽦紐?
-   mem_regno1            CHAR(6)        NOT NULL,   -- 二쇰?쇰벑濡앸쾲?샇?븵6?옄由?
-   mem_regno2            CHAR(7)        NOT NULL,   -- 二쇰?쇰벑濡앸쾲?샇?뮘7?옄由?
-   mem_bir               DATE,                      -- ?깮?씪
-   mem_zip               CHAR(7)        NOT NULL,   -- ?슦?렪踰덊샇
-   mem_add1              VARCHAR2(100)  NOT NULL,   -- 二쇱냼1
-   mem_add2              VARCHAR2(80)   NOT NULL,   -- 二쇱냼2
-   mem_hometel           VARCHAR2(14)   NOT NULL,   -- 吏묒쟾?솕踰덊샇                                
-   mem_comtel            VARCHAR2(14)   NOT NULL,   -- ?쉶?궗?쟾?솕踰덊샇                              
-   mem_hp                VARCHAR2(15),              -- ?씠?룞?쟾?솕
-   mem_mail              VARCHAR2(40)   NOT NULL,   -- E-mail二쇱냼
-   mem_job               VARCHAR2(40),              -- 吏곸뾽
-   mem_like              VARCHAR2(40),              -- 痍⑤??
-   mem_memorial          VARCHAR2(40),              -- 湲곕뀗?씪紐?
-   mem_memorialday       DATE,                      -- 湲곕뀗?씪?궇吏?
-   mem_mileage           NUMBER(10),                -- 留덉씪由ъ?              
-   mem_delete            VARCHAR2(1),               -- ?궘?젣?뿬遺?
+(  mem_id                VARCHAR2(15)   NOT NULL,   -- 회원ID  
+   mem_pass              VARCHAR2(15)   NOT NULL,   -- 비밀번호
+   mem_name              VARCHAR2(20)   NOT NULL,   -- 성명
+   mem_regno1            CHAR(6)        NOT NULL,   -- 주민등록번호앞6자리
+   mem_regno2            CHAR(7)        NOT NULL,   -- 주민등록번호뒤7자리
+   mem_bir               DATE,                      -- 생일
+   mem_zip               CHAR(7)        NOT NULL,   -- 우편번호
+   mem_add1              VARCHAR2(100)  NOT NULL,   -- 주소1
+   mem_add2              VARCHAR2(80)   NOT NULL,   -- 주소2
+   mem_hometel           VARCHAR2(14)   NOT NULL,   -- 집전화번호                                
+   mem_comtel            VARCHAR2(14)   NOT NULL,   -- 회사전화번호                              
+   mem_hp                VARCHAR2(15),              -- 이동전화
+   mem_mail              VARCHAR2(40)   NOT NULL,   -- E-mail주소
+   mem_job               VARCHAR2(40),              -- 직업
+   mem_like              VARCHAR2(40),              -- 취미
+   mem_memorial          VARCHAR2(40),              -- 기념일명
+   mem_memorialday       DATE,                      -- 기념일날짜
+   mem_mileage           NUMBER(10),                -- 마일리지              
+   mem_delete            VARCHAR2(1),               -- 삭제여부
    CONSTRAINT pk_mem_id PRIMARY KEY (mem_id) 
 );
 
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('a001','asdfasdf','源?????','760115','1406420','1976-01-15','135-972','???쟾?떆 ?룞援? ?슜?슫?룞','222-2踰덉?','042-621-4615',
-               '042-621-4615','011-621-4615','pyoedab@lycos.co.kr','二쇰?','?닔?쁺','寃고샎湲곕뀗?씪','1999-01-12',1000,'');
+       VALUES ('a001','asdfasdf','김은대','760115','1406420','1976-01-15','135-972','대전시 동구 용운동','222-2번지','042-621-4615',
+               '042-621-4615','011-621-4615','pyoedab@lycos.co.kr','주부','수영','결혼기념일','1999-01-12',1000,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('b001','1004','?씠?걶?씠','741004','2900000','1974-01-07','700-030','?꽌?슱?떆 泥쒖궗?룞 ?삁?걶留덉쓣','1004-29','02-888-9999',
-               '02-888-9999','016-888-9999','engelcd@pretty.net','?쉶?궗?썝','?닔?쁺','?븘踰꾨떂?깮?떊','1999-02-12',2300,'');
+       VALUES ('b001','1004','이쁜이','741004','2900000','1974-01-07','700-030','서울시 천사동 예쁜마을','1004-29','02-888-9999',
+               '02-888-9999','016-888-9999','engelcd@pretty.net','회사원','수영','아버님생신','1999-02-12',2300,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('c001','7777','?떊?슜?솚','740124','1400716','1974-01-24','407-817','???쟾愿묒뿭?떆 以묎뎄 ???씎?룞','477-9','042-123-5678',
-               '042-123-5678','011-123-5678','kyh01e@hanmail.net','援먯궗','?룆?꽌','?븘?궡?깮?씪','1999-03-12',3500,'');
+       VALUES ('c001','7777','신용환','740124','1400716','1974-01-24','407-817','대전광역시 중구 대흥동','477-9','042-123-5678',
+               '042-123-5678','011-123-5678','kyh01e@hanmail.net','교사','독서','아내생일','1999-03-12',3500,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('d001','123joy','?꽦?쑄誘?','460409','2000000','1946-04-09','501-705','???쟾?떆 以묎뎄 ?븯?뒛?룞 ','?븙 3踰덉?','042-222-8877',
-               '042-222-8877','019-222-8877','dbs81f@hanmail.net','怨듬Т?썝','蹂쇰쭅','寃고샎湲곕뀗?씪','1999-04-12',1700,'');
+       VALUES ('d001','123joy','성윤미','460409','2000000','1946-04-09','501-705','대전시 중구 하늘동 ','땅 3번지','042-222-8877',
+               '042-222-8877','019-222-8877','dbs81f@hanmail.net','공무원','볼링','결혼기념일','1999-04-12',1700,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('e001','00000000','?씠?삙?굹','750501','2406017','1975-05-01','617-800','???쟾?떆 ???뜒援? ?쓭?궡?룞','?삙媛뺤븘?뙆?듃','042-432-8901',
-               '042-432-8901','011-432-8901','bosiang@hanmail.net','?냽?뾽','?떦援?','?븘踰꾨떂?깮?떊','1999-05-12',6500,'');
+       VALUES ('e001','00000000','이혜나','750501','2406017','1975-05-01','617-800','대전시 대덕구 읍내동','혜강아파트','042-432-8901',
+               '042-432-8901','011-432-8901','bosiang@hanmail.net','농업','당구','아버님생신','1999-05-12',6500,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('f001','12345678','?떊?쁺?궓','751228','1459919','1972-11-04','140-706','???쟾愿묒뿭?떆 ???씎?룞','65-33 303?샇','042-253-2121',
-               '042-253-2121','011-253-2121','SUPER-KHG@HANMAIL.NET','二쇰?','蹂쇰쭅','?븘?궡?깮?씪','1999-06-12',2700,'');
+       VALUES ('f001','12345678','신영남','751228','1459919','1972-11-04','140-706','대전광역시 대흥동','65-33 303호','042-253-2121',
+               '042-253-2121','011-253-2121','SUPER-KHG@HANMAIL.NET','주부','볼링','아내생일','1999-06-12',2700,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('g001','1456','?넚寃쏀씗','771111','2403414','1965-01-01','339-841','異⑸궓湲덉궛援? ?젣?썝硫?','?떖?궡由?123-1','0412-356-3578',
-               '0412-356-3578','017-356-3578','lim052@hanmail.net','二쇰?','?뒪?궎','寃고샎湲곕뀗?씪','1999-07-12',800,'');
+       VALUES ('g001','1456','송경희','771111','2403414','1965-01-01','339-841','충남금산군 제원면','심내리123-1','0412-356-3578',
+               '0412-356-3578','017-356-3578','lim052@hanmail.net','주부','스키','결혼기념일','1999-07-12',800,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('h001','9999','?씪以??샇','740728','1455822','1967-03-01','339-841','異⑸궓 ?끉?궛?떆 ?뼇珥뚮㈃','?궛吏?3援? 345','042-522-1679',
-               '042-522-1679','019-522-1679','wingl7@hanmail.net','?쉶?궗?썝','?룆?꽌','?븘?궡?깮?씪','1999-08-12',1500,'');
+       VALUES ('h001','9999','라준호','740728','1455822','1967-03-01','339-841','충남 논산시 양촌면','산직3구 345','042-522-1679',
+               '042-522-1679','019-522-1679','wingl7@hanmail.net','회사원','독서','아내생일','1999-08-12',1500,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('i001','1111','理쒖??쁽','741220','2384719','1974-12-20','306-702','???쟾?떆 ?룞援? 媛??뼇1?룞','768-12','042-614-6914',
-               '042-614-6914','017-614-6914','pan@orgio.net','怨듬Т?썝','?벑?궛','?궓?렪?깮?씪','1999-09-12',900,'');
+       VALUES ('i001','1111','최지현','741220','2384719','1974-12-20','306-702','대전시 동구 가양1동','768-12','042-614-6914',
+               '042-614-6914','017-614-6914','pan@orgio.net','공무원','등산','남편생일','1999-09-12',900,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('j001','6262','源??쑄?씗','751019','2448920','1975-11-21','306-702','???쟾?떆 ?꽌援? ?궪泥쒕룞','?븳?떊?븘?뙆?듃305?룞309?샇','042-332-8976',
-               '042-332-8976','018-332-8976','maxsys@hanmail.net','?냽?뾽','媛쒓렇','寃고샎湲곕뀗?씪','1999-10-12',1100,'');
+       VALUES ('j001','6262','김윤희','751019','2448920','1975-11-21','306-702','대전시 서구 삼천동','한신아파트305동309호','042-332-8976',
+               '042-332-8976','018-332-8976','maxsys@hanmail.net','농업','개그','결혼기념일','1999-10-12',1100,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('k001','7227','?삤泥좏씗','620123','1449311','1962-01-23','306-702','???쟾?떆 ???뜒援? ???솕?룞','34-567','042-157-8765',
-               '042-157-8765','016-157-8765','equus@orgio.net','?옄?쁺?뾽','?꽌?삁','?븘?궡?깮?씪','1999-11-12',3700,'');
+       VALUES ('k001','7227','오철희','620123','1449311','1962-01-23','306-702','대전시 대덕구 대화동','34-567','042-157-8765',
+               '042-157-8765','016-157-8765','equus@orgio.net','자영업','서예','아내생일','1999-11-12',3700,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('l001','12345678','援ш만?룞','881214','1234566','1988-12-14','339-841','異⑸궓湲덉궛援? 湲덉궛?쓭',' ?븯由?35-322','0412-322-8865',
-               '0412-322-8865','016-322-8865','email815@hanmail.co.kr','?옄?쁺?뾽','諛붾몣','寃고샎湲곕뀗?씪','1999-12-12',5300,'');
+       VALUES ('l001','12345678','구길동','881214','1234566','1988-12-14','339-841','충남금산군 금산읍',' 하리35-322','0412-322-8865',
+               '0412-322-8865','016-322-8865','email815@hanmail.co.kr','자영업','바둑','결혼기념일','1999-12-12',5300,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('m001','pass','諛뺤???','750315','2555555','1975-03-15','306-702','???쟾愿묒뿭?떆 ?꽌援? 媛덈쭏?룞','?씤?꽦?븘?뙆?듃 234?룞 907?샇','042-252-0675',
-               '042-252-0675','016-252-0675','happy@hanmail.net','???뻾?썝','?벑?궛','?븘踰꾨떂?깮?떊','1999-12-12',1300,'');
+       VALUES ('m001','pass','박지은','750315','2555555','1975-03-15','306-702','대전광역시 서구 갈마동','인성아파트 234동 907호','042-252-0675',
+               '042-252-0675','016-252-0675','happy@hanmail.net','은행원','등산','아버님생신','1999-12-12',1300,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('n001','1111','?긽?썝?옱','750323','1011014','1975-03-23','306-702','???쟾?떆 ?룞援? ?옄?뼇?룞','32-23','042-632-2176',
-               '042-632-2176','019-632-2176','ping75@unitel.co.kr','異뺤궛?뾽','?굾?떆','寃고샎湲곕뀗?씪','1999-02-12',2700,'');
+       VALUES ('n001','1111','탁원재','750323','1011014','1975-03-23','306-702','대전시 동구 자양동','32-23','042-632-2176',
+               '042-632-2176','019-632-2176','ping75@unitel.co.kr','축산업','낚시','결혼기념일','1999-02-12',2700,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('o001','0909','諛곗씤?젙','780930','2447619','1978-09-30','306-702','???쟾?떆 ?꽌援? 媛덈쭏?룞','寃쎌꽦?븘?뙆?듃502?룞1101?샇','042-622-5971',
-               '042-622-5971','011-622-5971','tar-song@hanmail.net','?쉶?궗?썝','?벑?궛','?뼱癒몃떂?깮?떊','1999-03-12',2600,'');
+       VALUES ('o001','0909','배인정','780930','2447619','1978-09-30','306-702','대전시 서구 갈마동','경성아파트502동1101호','042-622-5971',
+               '042-622-5971','011-622-5971','tar-song@hanmail.net','회사원','등산','어머님생신','1999-03-12',2600,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('p001','sahra3','?삤?꽦?닚','730805','2458323','1973-08-05','306-702','???쟾?쑀?꽦援ъ넚媛뺣룞','?븳?넄?븘?뙆?듃 703?룞 407?샇','042-810-7658',
-               '042-810-7658','017-810-7658','sahra235@intz.com','怨듬Т?썝','?룆?꽌','?궓?렪?깮?씪','1999-05-12',2200,'');
+       VALUES ('p001','sahra3','오성순','730805','2458323','1973-08-05','306-702','대전유성구송강동','한솔아파트 703동 407호','042-810-7658',
+               '042-810-7658','017-810-7658','sahra235@intz.com','공무원','독서','남편생일','1999-05-12',2200,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('q001','0000','?쑁?룊?쉶','721020','1402722','1972-10-20','306-702','??援ш킅?뿭?떆 ???뜒援? 以묐━?룞','678-43','042-823-2359',
-               '042-823-2359','017-823-2359','kph@hanmail.net','?옄?쁺?뾽','留뚰솕','寃고샎湲곕뀗?씪','1999-06-12',1500,'');
+       VALUES ('q001','0000','육평회','721020','1402722','1972-10-20','306-702','대구광역시 대덕구 중리동','678-43','042-823-2359',
+               '042-823-2359','017-823-2359','kph@hanmail.net','자영업','만화','결혼기념일','1999-06-12',1500,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('r001','park1005','?젙???떎','770120','2382532','1976-11-26','306-702','???쟾?떆 ?룞援? ?슜?쟾?룞','321-25','042-533-8768',
-               '042-533-8768','016-533-8768','econie@hanmail.net','?븰?깮','?옣湲?','?뼱癒몃떂?깮?떊','1999-07-12',700,'');
+       VALUES ('r001','park1005','정은실','770120','2382532','1976-11-26','306-702','대전시 동구 용전동','321-25','042-533-8768',
+               '042-533-8768','016-533-8768','econie@hanmail.net','학생','장기','어머님생신','1999-07-12',700,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('s001','0819','?븞???젙','770819','2459927','1977-10-01','306-702','??援ш킅?뿭?떆 ?꽌援? ?깂諛⑸룞','?궛?샇?븘?뙆?듃 107?룞 802?샇','042-222-8155',
-               '042-222-8155','019-222-8155','songej@hanmail.net','怨듬Т?썝','諛붾몣','寃고샎湲곕뀗?씪','1999-07-12',3200,'');
+       VALUES ('s001','0819','안은정','770819','2459927','1977-10-01','306-702','대구광역시 서구 탄방동','산호아파트 107동 802호','042-222-8155',
+               '042-222-8155','019-222-8155','songej@hanmail.net','공무원','바둑','결혼기념일','1999-07-12',3200,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('t001','0506','?꽦?썝?깭','760506','1454731','1976-05-06','306-702','???쟾愿묒뿭?떆 以묎뎄 ?쑀泥쒕룞','?븳?궗?옉?븘?뙆?듃 302?룞 504?샇','042-272-8657',
-               '042-272-8657','011-272-8657','bob6@hanmail.net','?븰?깮','移대젅?씠?떛','寃고샎湲곕뀗?씪','1999-08-12',2200,'');
+       VALUES ('t001','0506','성원태','760506','1454731','1976-05-06','306-702','대전광역시 중구 유천동','한사랑아파트 302동 504호','042-272-8657',
+               '042-272-8657','011-272-8657','bob6@hanmail.net','학생','카레이싱','결혼기념일','1999-08-12',2200,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('u001','1000','源??꽦?슧','731010','1460111','1973-10-10','306-702','???쟾?떆 ?룞援? ?슜?쟾?룞','76-54','042-273-9056',
-               '042-273-9056','018-273-9056','pss576@orgio.net','二쇰?','?쁺?솕媛먯긽','寃고샎湲곕뀗?씪','1999-07-12',2700,'');
+       VALUES ('u001','1000','김성욱','731010','1460111','1973-10-10','306-702','대전시 동구 용전동','76-54','042-273-9056',
+               '042-273-9056','018-273-9056','pss576@orgio.net','주부','영화감상','결혼기념일','1999-07-12',2700,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('v001','00001111','?씠吏꾩쁺','520131','2402712','1952-01-31','306-702','???쟾?떆 ?룞援? ?슜?쟾?룞','566-39踰덉?','042-240-8766',
-               '042-240-8766','017-240-8766','gagsong@orgio.net','?옄?쁺?뾽','?굾?떆','?궓?렪?깮?씪','1999-09-12',4300,'');
+       VALUES ('v001','00001111','이진영','520131','2402712','1952-01-31','306-702','대전시 동구 용전동','566-39번지','042-240-8766',
+               '042-240-8766','017-240-8766','gagsong@orgio.net','자영업','낚시','남편생일','1999-09-12',4300,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('w001','12341234','源??삎紐?','631213','1111111','1963-12-13','306-702','???쟾?떆 ???뜒援? ?뿰異뺣룞','23-43','02-345-9877',
-               '02-345-9877','011-345-9877','songone@hanmail.net','?븰?깮','?벑?궛','寃고샎湲곕뀗?씪','1999-11-12',2700,'');
+       VALUES ('w001','12341234','김형모','631213','1111111','1963-12-13','306-702','대전시 대덕구 연축동','23-43','02-345-9877',
+               '02-345-9877','011-345-9877','songone@hanmail.net','학생','등산','결혼기념일','1999-11-12',2700,'');
 INSERT INTO member (mem_id,mem_pass,mem_name,mem_regno1,mem_regno2,mem_bir,mem_zip,mem_add1,mem_add2,mem_hometel,
                     mem_comtel,mem_hp,mem_mail,mem_job,mem_like,mem_memorial,mem_memorialday,mem_mileage,mem_delete)
-       VALUES ('x001','0000','吏꾪쁽寃?','770319','2110222','1977-03-19','306-702','???쟾愿묒뿭?떆 ?룞援? ?삤?젙?룞','43-26','042-223-8767',
-               '042-223-8767','019-223-8767','happysong@hanmail.net','二쇰?','?룆?꽌','寃고샎湲곕뀗?씪','1999-02-12',8700,'');
+       VALUES ('x001','0000','진현경','770319','2110222','1977-03-19','306-702','대전광역시 동구 오정동','43-26','042-223-8767',
+               '042-223-8767','019-223-8767','happysong@hanmail.net','주부','독서','결혼기념일','1999-02-12',8700,'');
 
 
 CREATE TABLE  cart
 (
-   cart_member      VARCHAR2(15)    NOT NULL,       -- ?쉶?썝ID
-   cart_no          CHAR(13)        NOT NULL,       -- 二쇰Ц踰덊샇
-   cart_prod        VARCHAR2(10)    NOT NULL,       -- ?긽?뭹肄붾뱶
-   cart_qty         NUMBER(8)       NOT NULL,       -- ?닔?웾
+   cart_member      VARCHAR2(15)    NOT NULL,       -- 회원ID
+   cart_no          CHAR(13)        NOT NULL,       -- 주문번호
+   cart_prod        VARCHAR2(10)    NOT NULL,       -- 상품코드
+   cart_qty         NUMBER(8)       NOT NULL,       -- 수량
    CONSTRAINT pk_cart PRIMARY KEY (cart_no,cart_prod),
    CONSTRAINT fr_cart_member FOREIGN KEY (cart_member) REFERENCES member(mem_id),
    CONSTRAINT fr_cart_prod   FOREIGN KEY (cart_prod)   REFERENCES prod(prod_id)
