@@ -22,3 +22,20 @@ Not, LIKE, IS NOT
 함수
 ABS, CEIL, Round, FLOOR, MOD, SQRT, LOWER, UPPER, SUBSTR
 pk fk
+
+21-02-2025
+단일행 함수(타입 변환)
+날짜 포맷 데이트 타입 -> 문자열
+toDate
+문자열 -> 데이터 타입
+문자가 숫자면 웬만하면 숫자로 받아들임
+공백 제거 TRIM, LTRIM, RTRIM
+문자열 패딩 (LPAD, RPAD)
+REPLACE(대상, 찾는, 변경) 정확하게 매칭
+TRANSLATE 한글자 씩 매칭
+INSTR 문자열 위치 찾기 (p1, p2, p3, p4) p1:대상문자열, p2찾을 문자열, p3 시작, p4 번째
+변환함수(타입) 많이 사용함.
+ 원하는 표현방법으로 바꾸기
+ TO_CHAR 문자형으로
+ TO_DATE 날짜
+ TO_NUMBER 숫자 ~
