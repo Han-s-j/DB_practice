@@ -242,7 +242,7 @@ SELECT emp_name
 FROM employees;
 
 /*
-    1. employess 직원 중 근속년수가 30년 이상인 직원만 출력하시오! (근속년수 내림차순)
+    1. employess 직원 중 근속년수가 26년 이상인 직원만 출력하시오! (근속년수 내림차순)
     2. customers 고객의 나이를 기준으로 30대, 40대, 50대를 구분하여 출력(나머지 연령대는 '기타')
         정렬(연령 오름차순), 검색조건(1.도시:Aachen, 2.출생년도:1960 ~ 1990년 출생까지
                                     , 3.결혼상태:single, 5.성별:남자)
@@ -254,6 +254,7 @@ SELECT emp_name
      , hire_date
      , TO_CHAR(SYSDATE, 'YYYY') - TO_CHAR(hire_date, 'YYYY') as 근속년수
 from employees
+where TO_CHAR(SYSDATE, 'YYYY') - TO_CHAR(hire_date, 'YYYY') >= 26
 ORDER BY hire_date ASC;
 ----- 2번 -----
 SELECT *
@@ -276,5 +277,21 @@ AND cust_marital_status LIKE '%single%'
 AND cust_gender = 'M'
 ORDER BY cust_year_of_birth DESC;
 
-    
-        
+----- 2번 선생님 방법 ------
+SELECT cust_name
+     , TO_CHAR(SYSDATE, 'YYYY') - cust_year_of_birth as age
+--     , TRUNC((TO_CHAR(SYSDATE, 'YYYY') - cust_year_of_birth)/10) as age2
+     , DECODE(TRUNC((TO_CHAR(SYSDATE, 'YYYY') - cust_year_of_birth)/10), 3, '30대'
+                                                                        ,4, '40대'
+                                                                        ,5, '50대'
+                                                                        ,'기타') as 연령                                            
+--     , cust_gender
+--     , cust_marital_status
+--     , cust_city
+FROM customers
+-- 조건문 많은 것 부터 걸기 (성능면에서 좋음)
+WHERE cust_city = 'Aachen'
+AND cust_gender = 'M'
+AND cust_marital_status = 'single'
+AND cust_year_of_birth BETWEEN 1960 AND 1990
+ORDER BY cust_year_of_birth DESC;
