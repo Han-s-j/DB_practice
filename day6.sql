@@ -48,7 +48,7 @@ ORDER BY 직원수;   -- 순서 상 order by에 as사용가능
 -- FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY
 
 -- member의 회원수와 마일리지의 합계, 평균 출력하시오
-SELECT COUNT(*) as 회원수
+SELECT COUNT(*) as 회원수  --빠르게 테이블 내 데이터 수를 파악하는 방법
     , COUNT(mem_id) as 회원수2
     , SUM(mem_mileage) as 합계
     , ROUND(AVG(mem_mileage), 2) as 평균
@@ -139,11 +139,9 @@ ORDER BY To_CHAR(hire_date,'d') ASC;
 -- cutstomers 회원의 전체회원수, 남자 회원수, 여자 회원수를 출력하시오
 -- 남자, 여자라는 컬럼은 없음
 -- customers 테이블의 컬럼을 활용해서 만들어야함
-ALTER TABLE customers ADD (남자 NUMBER(10));
-ALTER TABLE customers ADD (여자 NUMBER(10));
-INSERT INTO customers(남자)VALUES('M');
-SELECT 
-남자, 여자, cust_gender
-     ,COUNT(cust_gender) as 전체
-FROM customers
-GROUP BY 남자, 여자, cust_gender;
+-- COUNT SUM 같게 쓰임
+SELECT COUNT(DECODE(cust_gender, 'F', '여자')) as 여자
+     , SUM(DECODE(cust_gender, 'F', 1, 0)) as 여자2
+     , COUNT(DECODE(cust_gender, 'M', '남자')) as 남자
+     , SUM(DECODE(cust_gender, 'M', 1, 0)) as 남자2
+FROM customers;
