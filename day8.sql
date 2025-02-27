@@ -201,5 +201,7 @@ FROM(
 -- '전공별', '평점'이 '가장높은' 학생의 정보를 출력하시오
 SELECT *
 FROM 학생
-WHERE (전공,평점) = (SELECT 전공,MAX(평점) 
-                FROM 학생);
+WHERE (전공,평점) IN (SELECT 전공,MAX(평점) 
+                FROM 학생
+                GROUP BY 전공);
+                
