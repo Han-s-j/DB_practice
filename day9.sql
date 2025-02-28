@@ -228,22 +228,17 @@ FROM 과목;
     판매관련 컬럼(amount_sold, quantitly_sold, sales_date)
     (스칼라 서브쿼리와, 인라인 뷰를 사용해보세요^^)
 */
-SELECT amount_sold, quantity_sold, sales_date
-FROM SALES;
-SELECT employee_id, emp_name
-FROM employees;
 
--- 스칼라 서브쿼리
 SELECT a.employee_id
---     , a.emp_name       
-     , b.amount_sold    as 판매금액
-     , b.quantity_sold  as 판매수량 
      ,(SELECT emp_name
       FROM employees
       WHERE employee_id = a.employee_id) as 직원이름
---     , b.sales_date
-FROM employees a, SALES b
-WHERE a.employee_id = b.employee_id
---GROUP BY a.employee_id, a.emp_name ;
---WHERE amount_sold = (SELECT MAX(amount_sold) 
---                FROM SALES);
+     , TO_CHAR(판매금액, '999,999,999.99')    as 판매금액
+     , 판매수량
+FROM ( SELECT employee_id, SUM(amount_sold) as 판매금액
+            , SUM(quantity_sold) as 판매수량
+        FROM sales
+        WHERE TO_CHAR(sales_date , 'YYYY') = '2000'
+        GROUP BY employee_id
+        ORDER BY 2 DESC ) a
+WHERE ROWNUM <=1;
