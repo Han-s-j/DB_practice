@@ -6,7 +6,7 @@
 */
 -------- 계정 생성 ---------
 ALTER SESSION SET "_ORACLE_SCRIPT" = true;
--- 계정 생성 계정명: java, 비번: oracle
+-- 계정 생성 계정명: study, 비번: study
 CREATE USER study IDENTIFIED BY study;
 -- 권한 부여 (접속 & 리소스 생성 및 접근)
 GRANT CONNECT, RESOURCE TO study;
@@ -1133,23 +1133,52 @@ FROM(
             SELECT TO_CHAR(first_reg_date,'day') as 요일
             , count(*) as 건수
             FROM customer
-            -- 검색조건
             GROUP BY TO_CHAR(first_reg_date,'day'), To_CHAR(first_reg_date,'d')
             ORDER BY 건수 DESC
-            ) a --검색조건을 쓰려면 테이블이 있는 것 처럼 해야 함
+            ) a
     )
 WHERE ROWNUM = 1;
 ----------4-2번 문제 ---------------------------------------------------
 -- 남녀 인원수를 출력하시오 
 ---------------------------------------------------------------------
-SELECT --널처리 먼저 -> 집계 , 그룹핑_id
-      CASE WHEN sex_code = 'F' THEN '여자'
+SELECT
+      CASE
+      WHEN sex_code is null AND GROUPING(sex_code) = 0 THEN '미등록'
+      WHEN sex_code is null AND GROUPING(sex_code) = 1 THEN '합계'
+      WHEN sex_code = 'F' THEN '여자'
       WHEN sex_code = 'M' THEN '남자'
-      ELSE '미등록'
       END as gender
      ,COUNT(*) as cnt
     FROM customer
     GROUP BY ROLLUP (sex_code);
+    
+--SELECT --널처리 먼저 -> 집계 , 그룹핑_id    
+--          CASE
+--      WHEN sex_code is null THEN '미등록'
+--      WHEN sex_code = 'F' THEN '여자'
+--      WHEN sex_code = 'M' THEN '남자'
+--      END as gender
+--     ,COUNT(*) as cnt
+--    FROM customer
+--    GROUP BY ROLLUP (sex_code);
+
 ----------5번 문제 ---------------------------------------------------
 --월별 예약 취소 건수를 출력하시오 (많은 달 부터 출력)
 ---------------------------------------------------------------------
+SELECT
+        SUBSTR(reserv_date,5,2) as 월
+             ,
+             CASE
+             WHEN cancel = 'Y' THEN count(cancel)
+             END as 취소건수
+        FROM reservation
+        WHERE cancel = 'Y'
+        GROUP BY substr(reserv_date,5,2), cancel
+        ORDER BY 2 DESC;
+SELECT
+        SUBSTR(reserv_date,5,2) as 월
+             ,COUNT(*) as 취소건수
+        FROM reservation
+        WHERE cancel = 'Y'
+        GROUP BY substr(reserv_date,5,2), cancel
+        ORDER BY 취소건수 DESC;
