@@ -110,6 +110,11 @@ PUBLIC과 PRIVATE가 있음
 함수 사용법
 REGEXP_LIKE
 
+04-03-2025
+계층형 쿼리
+start with 조건 : 뭘 기준으로 잡고 계층을 만들것인가, 어떤 행이 가장 최상위 계증인가
+connect by 조건 : 어떤 컬럼이 연결되는지 
+
 
 
 
