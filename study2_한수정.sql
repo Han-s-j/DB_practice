@@ -29,12 +29,13 @@ FROM item;
 SELECT *
 FROM order_info;
 SELECT SUBSTR(b.reserv_no,1,6) as 매출월
-    , SUM(b.sales) as wine
-    , SUM(b.sales) as wine
-    , SUM(b.sales) as wine
+    , CASE WHEN b.item_id = 'M0009' THEN SUM(b.sales) 
+        END as wine
+    , CASE WHEN b.item_id = 'M0010' THEN SUM(b.sales) 
+        END as juice
 FROM item a, order_info b
 WHERE a.item_id = b.item_id
-GROUP BY SUBSTR(b.reserv_no,1,6);
+GROUP BY SUBSTR(b.reserv_no,1,6), b.item_id;
 
 ---------- 8번 문제 ---------------------------------------------------
 -- 월별 온라인_전용 상품 매출액을 일요일부터 월요일까지 구분해 출력하시오 
