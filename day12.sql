@@ -186,23 +186,37 @@ FROM 학생
 ORDER BY 전공, 평점 desc;
 
 -- 문제
--- CART, PROD를 활용하여 물품별 판매 PROD_SALE 합계 순위를 출력하시오(동일 순위 건너뜀)
-SELECT *
-FROM cart;
-SELECT prod_id
-     , prod_name
-     , prod_price
-     , RANK() OVER(PARTITION BY prod_id
-                    ORDER BY prod_price DESC) RNAK_SALE
-FROM prod;
+-- CART, PROD를 활용하여 물품별 판매 prod_price 합계 순위를 출력하시오(동일 순위 건너뜀)
+-- 집계함수, 분석함수
 
-SELECT b.period
-     , MAX(b.jan_amt) as max_jan_amt
-FROM (SELECT MAX(period) as max_month
-        FROM prod
-        GROUP BY substr(period, 1, 4)) a
-    ,(SELECT period, region, SUM(loan_jan_amt) as jan_amt
-        FROM kor_loan_status
-        GROUP BY period, region) b
-WHERE a.max_month = b.period
-GROUP BY b.period;
+--SELECT a.prod_id
+--     , a.prod_name
+--     , sum(a.prod_price) * count(b.cart_prod) price
+--     , RANK() OVER(PARTITION BY c.LPROD_GU
+--                    ORDER BY 3 DESC) RANK_SALE
+--        FROM prod a, cart b, lprod c
+--WHERE a.prod_id = b.cart_prod
+--AND a.PROD_LGU = c.LPROD_GU
+--GROUP BY a.prod_id, a.prod_name, LPROD_GU
+--ORDER BY 3 DESC;
+-- 방법1
+SELECT a.*
+    , RANK() OVER(ORDER BY sale_sum DESC) as rnk
+FROM (
+        SELECT b.prod_id
+             , b.prod_name
+             , SUM(b.prod_price * a.cart_qty) as sale_sum
+        FROM cart a, prod b
+        WHERE a.cart_prod = b.prod_id
+        GROUP BY b.prod_id
+              , b.prod_name
+        ) a;
+-- 방법2
+SELECT b.prod_id
+        , b.prod_name
+        , SUM(b.prod_price * a.cart_qty) as sale_sum
+        , RANK() OVER(ORDER BY SUM(b.prod_price * a.cart_qty) DESC) as rnk
+FROM cart a, prod b
+WHERE a.cart_prod = b.prod_id
+GROUP BY b.prod_id
+        , b.prod_name;
