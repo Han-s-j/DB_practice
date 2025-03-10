@@ -125,7 +125,9 @@ END;
         2025000001 ->> 올해 +1 : 2025000002
     비교 a = b , 할당 :=
 */
-
+ -- 1. 가장 큰 학번 조회
+ -- 2. 올해와 비교
+ -- 조건에 따라 번호 생성
 SELECT fn_make_hakno
 FROM dual;
 
@@ -133,15 +135,17 @@ CREATE OR REPLACE FUNCTION fn_make_hakno
  RETURN NUMBER
 IS
  make_no NUMBER;
+ max_hakno NUMBER;
  this_year VARCHAR2(4) := TO_CHAR(SYSDATE, 'YYYY');
- max_hakno NUMBER(20) := MAX(학번);
 BEGIN
  SELECT MAX(학번)
- , SUBSTR(MAX(학번),1,4) as 년도
- , TO_CHAR(SYSDATE, 'YYYY') as 올해년도;
- -- 1. 가장 큰 학번 조회
- -- 2. 올해와 비교
- -- 조건에 따라 번호 생성
- RETURN make_no;
- 
+    INTO max_no
+    FROM 학생;
+ IF this_year = SUBSTR(TO_CHAR(max_no),1,4) THEN 
+    make_no := max_no + 1;
+ ELSE
+    make_no := TO_NUMBER(this_year || '000001');
+ END IF;
+RETURN make_no;
 END;
+
