@@ -19,30 +19,31 @@ ORDER BY 2 DESC;
 --SELECT *
 --FROM order_info;
 
---SELECT SUBSTR(b.reserv_no,1,6) as 매출월
---, SUM( CASE WHEN b.item_id = 'M0001' THEN b.sales
---     ELSE 0 END) as special_set
---     , SUM( CASE WHEN b.item_id = 'M0002' THEN b.sales
---     ELSE 0 END) as pasta
---     , SUM( CASE WHEN b.item_id = 'M0003' THEN b.sales
---     ELSE 0 END) as pizza
---     , SUM( CASE WHEN b.item_id = 'M0004' THEN b.sales
---     ELSE 0 END) as sea_food
---     , SUM( CASE WHEN b.item_id = 'M0005' THEN b.sales
---     ELSE 0 END) as steak
---     , SUM( CASE WHEN b.item_id = 'M0006' THEN b.sales
---     ELSE 0 END) as salad_bar
---     , SUM( CASE WHEN b.item_id = 'M0007' THEN b.sales
---     ELSE 0 END) as salad
---     , SUM( CASE WHEN b.item_id = 'M0008' THEN b.sales
---     ELSE 0 END) as sandwhich
---     , SUM( CASE WHEN b.item_id = 'M0009' THEN b.sales
---     ELSE 0 END) as wine
---     , SUM( CASE WHEN b.item_id = 'M0010' THEN b.sales
---     ELSE 0 END) as juice
---FROM item a, order_info b
---WHERE a.item_id = b.item_id
---GROUP BY SUBSTR(b.reserv_no,1,6);
+SELECT SUBSTR(b.reserv_no,1,6) as 매출월
+, SUM( CASE WHEN b.item_id = 'M0001' THEN b.sales
+     ELSE 0 END) as special_set
+     , SUM( CASE WHEN b.item_id = 'M0002' THEN b.sales
+     ELSE 0 END) as pasta
+     , SUM( CASE WHEN b.item_id = 'M0003' THEN b.sales
+     ELSE 0 END) as pizza
+     , SUM( CASE WHEN b.item_id = 'M0004' THEN b.sales
+     ELSE 0 END) as sea_food
+     , SUM( CASE WHEN b.item_id = 'M0005' THEN b.sales
+     ELSE 0 END) as steak
+     , SUM( CASE WHEN b.item_id = 'M0006' THEN b.sales
+     ELSE 0 END) as salad_bar
+     , SUM( CASE WHEN b.item_id = 'M0007' THEN b.sales
+     ELSE 0 END) as salad
+     , SUM( CASE WHEN b.item_id = 'M0008' THEN b.sales
+     ELSE 0 END) as sandwhich
+     , SUM( CASE WHEN b.item_id = 'M0009' THEN b.sales
+     ELSE 0 END) as wine
+     , SUM( CASE WHEN b.item_id = 'M0010' THEN b.sales
+     ELSE 0 END) as juice
+FROM item a, order_info b
+WHERE a.item_id = b.item_id
+GROUP BY SUBSTR(b.reserv_no,1,6)
+ORDER BY 매출월 ASC;
 
 SELECT SUBSTR(b.reserv_no,1,6) as 매출월
     , SUM( CASE WHEN b.item_id = 'M0001' THEN b.sales
