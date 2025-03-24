@@ -141,3 +141,11 @@ ALTER TABLE boards ADD(del_yn VARCHAR2(2));
 UPDATE boards
 SET del_yn = 'N';
 
+SELECT *
+from replys;
+UPDATE replys
+SET del_yn = 'Y'
+WHERE reply_no = '250321115117758';
+
+
+
