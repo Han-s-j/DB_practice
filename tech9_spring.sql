@@ -48,7 +48,7 @@ FROM comm_code
 WHERE comm_parent = 'BC00';
 
 CREATE TABLE free_board(
-    bo_no NUMBER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1 NOCACHE) PRIMARY KEY
+    bo_no NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY
     ,bo_title VARCHAR2(250) NOT NULL
     ,bo_category VARCHAR2(4)
     ,bo_writer VARCHAR2(100) NOT NULL
@@ -115,13 +115,51 @@ FROM free_board;
 
 SELECT *
 FROM(
-        SELECT ROWNUM as rnum
-            , a.*
-        FROM(
-            SELECT *
-            FROM free_board
-            -- 검색조건
+    SELECT rownum as rnum
+        ,a.*
+    FROM (SELECT a.bo_no
+                ,a.bo_title
+                ,a.bo_category
+                ,b.comm_nm as bo_category_nm
+                ,a.bo_writer
+                ,a.bo_pass
+                ,a.bo_content
+                ,a.bo_ip
+                ,a.bo_hit
+                ,a.bo_del_yn
+                ,TO_CHAR(a.bo_reg_date, 'YYYY-MM-DD') as bo_reg_date
+                ,TO_CHAR(a.bo_mod_date, 'YYYY-MM-DD') as bo_mod_date
+            FROM free_board a
+                , comm_code b
+            WHERE a.bo_category = b.comm_cd
+            AND   a.bo_title LIKE '%%'
             ORDER BY bo_no DESC
-            ) a --검색조건을 쓰려면 테이블이 있는 것 처럼 해야 함
-    )
-WHERE rnum BETWEEN 1 AND 10
+            ) a
+    )b
+WHERE rnum BETWEEN 11 AND 20;
+        
+--SELECT *
+--FROM(
+--        SELECT ROWNUM as rnum
+--            , a.*
+--        FROM(
+--            SELECT *
+--            FROM free_board
+--            -- 검색조건
+--            ORDER BY bo_no DESC
+--            ) a --검색조건을 쓰려면 테이블이 있는 것 처럼 해야 함
+--    )
+--WHERE rnum BETWEEN 1 AND 10
+
+UPDATE free_board
+SET bo_hit = 1
+WHERE bo_no = '21';
+
+SELECT *
+FROM free_board;
+
+DELETE COMM_CODE
+WHERE comm_cd = 'JB10';
+
+SELECT *
+FROM comm_code;
