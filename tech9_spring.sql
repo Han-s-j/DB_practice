@@ -152,7 +152,7 @@ WHERE rnum BETWEEN 11 AND 20;
 --WHERE rnum BETWEEN 1 AND 10
 
 UPDATE free_board
-SET bo_hit = 1
+SET bo_hit = 0
 WHERE bo_no = '21';
 
 SELECT *
@@ -163,3 +163,53 @@ WHERE comm_cd = 'JB10';
 
 SELECT *
 FROM comm_code;
+
+desc free_board;
+--INSERT INTO free_board(bo_title, bo_category, bo_writer, bo_pass, bo_content)
+--VALUES()
+
+select bo_no
+     , bo_title
+     , bo_category
+     ,b.comm_nm as bo_category_nm
+     , bo_writer
+     , bo_content
+     , bo_hit
+     , bo_mod_date
+from free_board a
+    , comm_code b
+WHERE a.bo_category = b.comm_cd
+AND   a.bo_no = 143
+AND   a.bo_del_yn = 'N';
+
+UPDATE free_board
+SET    bo_hit = bo_hit + 1
+WHERE  bo_no = 143;
+
+CREATE TABLE rooms(
+    room_no NUMBER PRIMARY KEY
+    ,room_name VARCHAR2(1000)
+    ,mem_id VARCHAR2(50)
+    ,reg_date DATE DEFAULT SYSDATE
+    ,del_yn VARCHAR2(1) DEFAULT 'N'
+    ,CONSTRAINT fk_mem_id2 FOREIGN KEY (mem_id) REFERENCES members(mem_id) ON DELETE CASCADE
+);
+
+SELECT *
+FROM rooms;
+
+CREATE TABLE chatlog(
+    chat_no NUMBER PRIMARY KEY
+    ,room_no NUMBER
+    ,mem_id VARCHAR2(50)
+    ,chat_msg VARCHAR2(4000)
+    ,send_date DATE DEFAULT SYSDATE
+    ,CONSTRAINT fk_room_no FOREIGN KEY (room_no) REFERENCES rooms(room_no) ON DELETE CASCADE
+    ,CONSTRAINT fk_mem_id3 FOREIGN KEY (mem_id) REFERENCES members(mem_id) ON DELETE CASCADE
+);
+
+SELECT *
+FROM chatlog;
+
+
+
