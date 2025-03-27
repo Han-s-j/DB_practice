@@ -192,11 +192,14 @@ CREATE TABLE rooms(
     ,mem_id VARCHAR2(50)
     ,reg_date DATE DEFAULT SYSDATE
     ,del_yn VARCHAR2(1) DEFAULT 'N'
-    ,CONSTRAINT fk_mem_id2 FOREIGN KEY (mem_id) REFERENCES members(mem_id) ON DELETE CASCADE
+    ,CONSTRAINT fk_mem_id2 FOREIGN KEY (mem_id) REFERENCES members(mem_id)
 );
 
-SELECT *
-FROM rooms;
+CREATE SEQUENCE room_req //seq
+INCREMENT BY 1
+START WITH 1
+NOCACHE
+NOCYCLE;
 
 CREATE TABLE chatlog(
     chat_no NUMBER PRIMARY KEY
@@ -204,12 +207,45 @@ CREATE TABLE chatlog(
     ,mem_id VARCHAR2(50)
     ,chat_msg VARCHAR2(4000)
     ,send_date DATE DEFAULT SYSDATE
-    ,CONSTRAINT fk_room_no FOREIGN KEY (room_no) REFERENCES rooms(room_no) ON DELETE CASCADE
-    ,CONSTRAINT fk_mem_id3 FOREIGN KEY (mem_id) REFERENCES members(mem_id) ON DELETE CASCADE
+    ,CONSTRAINT chat_room_fk FOREIGN KEY (room_no) REFERENCES rooms(room_no)
+    ,CONSTRAINT chat_mem_fk FOREIGN KEY (mem_id) REFERENCES members(mem_id)
 );
 
-SELECT *
-FROM chatlog;
+CREATE SEQUENCE chat_req //seq
+INCREMENT BY 1
+START WITH 1
+NOCACHE
+NOCYCLE;
 
+-- 방생성
+INSERT INTO rooms (room_no, room_name, mem_id)
+VALUES (room_req.NEXTVAL, '방 테스트', 'cookie');
+-- 방 리스트
+SELECT a.room_no
+      ,a.room_name
+      ,b.mem_id
+      ,b.mem_nm
+      ,a.reg_date
+FROM rooms a, members b
+WHERE a.mem_id = b.mem_id
+AND a.del_yn = 'N'
+ORDER BY a.reg_date DESC;
+-- 채팅내용 저장
+INSERT INTO chatlog(chat_no, room_no, mem_id, chat_msg)
+VALUES(chat_req.NEXTVAL, '2', 'cookie', '첫 대화');
+INSERT INTO chatlog(chat_no, room_no, mem_id, chat_msg)
+VALUES(chat_req.NEXTVAL, '2', 'sponge', '방가방가');
+-- 채팅 내용
+SELECT a.chat_no
+     , b.mem_id
+     ,b.mem_nm
+     ,a.room_no
+     ,a.chat_msg
+     ,NVL(b.profile_img, '/assets/img/non.png') as porfile_img
+     ,TO_CHAR(a.send_date, 'RR/MM/DD HH24:MI') as send_date
+FROM chatlog a, members b
+WHERE a.mem_id = b.mem_id
+AND a.room_no = '2'
+ORDER BY chat_no;
 
 
